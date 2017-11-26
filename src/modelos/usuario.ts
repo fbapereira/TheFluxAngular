@@ -1,9 +1,10 @@
 import { Instituicao } from "./instituicao";
 
-export class Pagamento {
+export class Usuario {
     id: number;
-    ano: number;
-    mes: number;
-    isPago: boolean;
     instituicao: Instituicao;
+    login: string;
+    senha: string;
+    isAdmin: boolean;
+
 }

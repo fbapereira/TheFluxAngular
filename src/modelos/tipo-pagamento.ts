@@ -1,9 +1,9 @@
 import { Instituicao } from "./instituicao";
 
-export class Pagamento {
+export class TipoPagamento {
     id: number;
-    ano: number;
-    mes: number;
-    isPago: boolean;
     instituicao: Instituicao;
+    nome: string;
+    cobrancaJuros: number;
+
 }

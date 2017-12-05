@@ -12,12 +12,14 @@ import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardComponent } from './dashboard-component/dashboard.component';
 import { UsuarioService } from '../servicos/usuario.service';
+import { MenuComponent } from './menu-component/menu.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     DashboardComponent,
-    AppComponent
+    AppComponent, 
+    MenuComponent
   ],
   imports: [
     BrowserModule,

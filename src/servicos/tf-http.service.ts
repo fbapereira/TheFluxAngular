@@ -14,4 +14,8 @@ export class TFHTTPService {
         return this.http.post(this.URL_CONF + url, body);
     }
 
+
+    get(url: string): Observable<Object> {
+        return this.http.get(this.URL_CONF + url);
+    }
 }

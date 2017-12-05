@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Usuario } from '../../modelos/usuario';
-import { LoginService } from '../../servicos/login.service';
 import { ToasterService } from 'angular2-toaster';
 import { RouterModule, Router } from '@angular/router';
 import { UsuarioService } from '../../servicos/usuario.service';
@@ -11,7 +10,7 @@ import { UsuarioService } from '../../servicos/usuario.service';
 })
 export class LoginComponent {
     oUsuario: Usuario;
-    constructor(private LoginService: LoginService,
+    constructor(
         private toasterService: ToasterService,
         private usuarioService: UsuarioService,
         private router: Router
@@ -39,7 +38,7 @@ export class LoginComponent {
     }
 
     executaLogin(usuario: Usuario): void {
-        this.LoginService.Login(usuario)
+        this.usuarioService.Login(usuario)
             .catch((a, e) => {
                 this.toasterService.pop('success', 'Não foi possivel realizar o login');
                 return [];

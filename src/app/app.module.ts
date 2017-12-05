@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { LoginService } from '../servicos/login.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { TFHTTPService } from '../servicos/tf-http.service';
@@ -13,16 +12,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardComponent } from './dashboard-component/dashboard.component';
 import { UsuarioService } from '../servicos/usuario.service';
 import { MenuComponent } from './menu-component/menu.component';
-
+import { UsuarioComponent } from './usuario-component/usuario.component';
+import { AddUsuarioComponent } from './add-usuario-component/add-usuario.component';
+import { MaterializeModule } from "angular2-materialize";
 @NgModule({
   declarations: [
     LoginComponent,
     DashboardComponent,
-    AppComponent, 
-    MenuComponent
+    AppComponent,
+    MenuComponent,
+    AddUsuarioComponent,
+    UsuarioComponent
   ],
   imports: [
     BrowserModule,
+    MaterializeModule,
     HttpClientModule,
     FormsModule,
     ToasterModule, BrowserAnimationsModule,
@@ -30,13 +34,15 @@ import { MenuComponent } from './menu-component/menu.component';
       [
         { path: 'login', component: LoginComponent },
         { path: 'dashboard', component: DashboardComponent },
+        { path: 'usuario', component: UsuarioComponent },
+        { path: 'add-usuario', component: AddUsuarioComponent },
         { path: '', redirectTo: '/login', pathMatch: 'full' },
         // { path: '**', component: PageNotFoundComponent }
       ],
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [LoginService, HttpClient, TFHTTPService, UsuarioService],
+  providers: [HttpClient, TFHTTPService, UsuarioService],
   bootstrap: [AppComponent]
 })
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Usuario } from '../../modelos/usuario';
-import { LoginService } from '../../servicos/login.service';
 import { ToasterService } from 'angular2-toaster';
+import { UsuarioService } from '../../servicos/usuario.service';
 
 @Component({
     selector: 'u2x-tf-dashboard',
@@ -9,7 +9,8 @@ import { ToasterService } from 'angular2-toaster';
 })
 export class DashboardComponent {
     oUsuario: Usuario;
-    constructor(private LoginService: LoginService, private toasterService: ToasterService) {
+    constructor(private toasterService: ToasterService,
+        private usuarioService: UsuarioService) {
         this.oUsuario = new Usuario();
     }
 
@@ -25,7 +26,7 @@ export class DashboardComponent {
 
         }
 
-        this.LoginService.Login(usuario)
+        this.usuarioService.Login(usuario)
             .catch((a, e) => {
                 this.toasterService.pop('success', 'Não foi possivel realizar o login');
                 return [];

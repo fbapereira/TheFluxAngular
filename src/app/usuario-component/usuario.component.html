@@ -6,22 +6,20 @@
                     <i class="material-icons ">filter_list</i>Todos
                 </div>
                 <div class="collapsible-body ">
-                    <table *ngIf="usuarios && usuarios.length > 0" ng-init="colap()">
+                    <table *ngIf="usuarios && usuarios.length > 0" >
                         <thead>
                             <tr>
-                                <th>Nome</th>
-                                <th>Tipo</th>
-                                <th>#</th>
+                                <th width="75%">Nome</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let usuario of usuarios">
                                 <td>{{usuario.login}}</td>
                                 <td>
-                                    <i *ngIf="usuario.isAdmin" class="material-icons">star</i>
-                                </td>
-                                <td>
-                                    <i class="material-icons">vpn_key</i>
+                                    <i class="material-icons" (click)="ChangePassword(usuario)">vpn_key</i>
+                                    <i *ngIf="usuario.isAdmin" class="material-icons" (click)="ChangeAdmin(usuario, false)">star</i>
+                                    <i *ngIf="!usuario.isAdmin" class="material-icons" (click)="ChangeAdmin(usuario, true)">star_border</i>
                                 </td>
                             </tr>
 
@@ -33,7 +31,7 @@
     </div>
 </div>
 <div class="fixed-action-btn ">
-    <a class="btn-floating purple darken-3 " routerLink="/add-usuario" routerLinkActive="active">
+    <a class="btn-floating purple darken-3" routerLink="/add-usuario" routerLinkActive="active">
         <i class="material-icons ">add</i>
     </a>
 </div>

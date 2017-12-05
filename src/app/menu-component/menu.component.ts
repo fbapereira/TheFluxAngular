@@ -16,4 +16,8 @@ export class MenuComponent {
 
     }
 
+    LogOut(): void {
+        this.usuarioService.usuario = undefined;
+        this.router.navigate(['/login'])
+    }
 }

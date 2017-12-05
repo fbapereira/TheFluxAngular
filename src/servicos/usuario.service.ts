@@ -14,10 +14,14 @@ export class UsuarioService {
 
     private oUsuario: Usuario;
     public get usuario(): Usuario {
-        if (!this.oUsuario) {
-            this.oUsuario = JSON.parse(sessionStorage.getItem('usuario'));
+        if (this.oUsuario) {
+            return this.oUsuario;
         }
-        return this.oUsuario;
+        let sUsuario = sessionStorage.getItem('usuario');
+        if (sUsuario && sUsuario != "undefined") {
+            return JSON.parse(sUsuario);
+        }
+        return undefined;
     }
 
     public set usuario(usuario: Usuario) {

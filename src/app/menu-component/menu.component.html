@@ -7,12 +7,12 @@
 <nav class="purple darken-3" role="navigation" *ngIf="usuarioService.usuario">
     <div class="nav-wrapper container">
         <a id="logo-container" href="#" class="brand-logo left hide-on-med-and-down">The Flux</a>
-        <a href="# " data-activates="mobile-demo " class="button-collapse ">
+        <a href="#" data-activates="mobile-demo " class="button-collapse ">
             <i class="material-icons ">menu</i>
         </a>
         <ul class="right hide-on-med-and-down ">
             <li>
-                <a id="mnInicio " href="dashboard.html">Inicio</a>
+                <a routerLink="/dashboard" routerLinkActive="active">Inicio</a>
             </li>
             <li>
                 <a id="mnUsuario " href="AlterarSenha.html">Alterar Senha</a>
@@ -27,12 +27,12 @@
                 <a routerLink="/usuario" routerLinkActive="active" *ngIf="usuarioService.usuario.isAdmin">Usuário</a>
             </li>
             <li>
-                <a id="mnSair " href="index.html">Sair</a>
+                <a id="mnSair" (click)="LogOut()">Sair</a>
             </li>
         </ul>
         <ul class="side-nav " id="mobile-demo ">
             <li>
-                <a id="mnInicio " href="dashboard.html ">Inicio</a>
+                <a routerLink="/dashboard" routerLinkActive="active">Inicio</a>
             </li>
             <li>
                 <a id="mmUsuario " href="AlterarSenha.html ">Alterar Senha</a>
@@ -47,7 +47,7 @@
                 <a routerLink="/usuario" routerLinkActive="active" *ngIf="usuarioService.usuario.isAdmin">Usuário</a>
             </li>
             <li>
-                <a id="mmSair " href="index.html ">Sair</a>
+                <a id="mmSair" (click)="LogOut() ">Sair</a>
             </li>
         </ul>
 

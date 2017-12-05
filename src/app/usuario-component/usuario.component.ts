@@ -14,6 +14,7 @@ export class UsuarioComponent {
 
     constructor(
         private usuarioService: UsuarioService,
+        private toasterService: ToasterService,
         private router: Router) {
         this.usuarioService.Get(1)
             .subscribe((usuarios: Usuario[]) => {
@@ -22,4 +23,13 @@ export class UsuarioComponent {
             })
     }
 
+    ChangeAdmin(usuarios: Usuario): void {
+        this.toasterService.pop('success', 'O usuario ['+usuarios.login+'] tornou-se administrador.');
+
+    }
+
+    ChangePassword(usuarios: Usuario, toAdmin:boolean): void {
+        this.toasterService.pop('success', 'O usuario ['+usuarios.login+'] trocou de senha');
+
+    }
 }

@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { Usuario } from '../../modelos/usuario';
 import { LoginService } from '../../servicos/login.service';
 import { ToasterService } from 'angular2-toaster';
-//import { RouterModule, Router } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
+import { UsuarioService } from '../../servicos/usuario.service';
 
 @Component({
     selector: 'u2x-tf-login',
@@ -12,9 +13,14 @@ export class LoginComponent {
     oUsuario: Usuario;
     constructor(private LoginService: LoginService,
         private toasterService: ToasterService,
-        //     private router: Router
+        private usuarioService: UsuarioService,
+        private router: Router
     ) {
         this.oUsuario = new Usuario();
+        if (this.usuarioService.usuario) {
+            this.executaLogin(this.usuarioService.usuario);
+        }
+
     }
 
     btnLoginClick(usuario: Usuario) {
@@ -28,7 +34,11 @@ export class LoginComponent {
             return [];
 
         }
+        this.executaLogin(usuario);
 
+    }
+
+    executaLogin(usuario: Usuario): void {
         this.LoginService.Login(usuario)
             .catch((a, e) => {
                 this.toasterService.pop('success', 'Não foi possivel realizar o login');
@@ -38,7 +48,8 @@ export class LoginComponent {
                 if (!usu) {
                     this.toasterService.pop('success', 'O [usuario] ou [senha] inválidos');
                 }
-                //this.router.navigate(['/dashboard']);
+                this.usuarioService.usuario = usu;
+                this.router.navigate(['/dashboard']);
             });
     }
 }

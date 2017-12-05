@@ -11,6 +11,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardComponent } from './dashboard-component/dashboard.component';
+import { UsuarioService } from '../servicos/usuario.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { DashboardComponent } from './dashboard-component/dashboard.component';
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [LoginService, HttpClient, TFHTTPService],
+  providers: [LoginService, HttpClient, TFHTTPService, UsuarioService],
   bootstrap: [AppComponent]
 })
 

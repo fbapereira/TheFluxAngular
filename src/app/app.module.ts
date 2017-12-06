@@ -17,6 +17,8 @@ import { AddUsuarioComponent } from './add-usuario-component/add-usuario.compone
 import { MaterializeModule } from "angular2-materialize";
 import { TipoMovimentacaoComponent } from './tipo-movimentacao-component/tipo-movimentacao.component';
 import { TipoMovimentacaoService } from '../servicos/tipo-movimentacao.service';
+import { AddMovimentacaoComponent } from './add-movimentacao-component/add-movimentacao.component';
+import { AlterarSenhaComponent } from './alterar-senha-component/alterar-senha.component';
 @NgModule({
   declarations: [
     LoginComponent,
@@ -25,7 +27,9 @@ import { TipoMovimentacaoService } from '../servicos/tipo-movimentacao.service';
     MenuComponent,
     AddUsuarioComponent,
     UsuarioComponent,
-    TipoMovimentacaoComponent
+    TipoMovimentacaoComponent,
+    AddMovimentacaoComponent, 
+    AlterarSenhaComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +43,9 @@ import { TipoMovimentacaoService } from '../servicos/tipo-movimentacao.service';
         { path: 'dashboard', component: DashboardComponent },
         { path: 'usuario', component: UsuarioComponent },
         { path: 'tipo-movimentacao', component: TipoMovimentacaoComponent },
+        { path: 'add-movimentacao', component: AddMovimentacaoComponent },
         { path: 'add-usuario', component: AddUsuarioComponent },
+        { path: 'alter-senha', component: AlterarSenhaComponent },
         { path: '', redirectTo: '/login', pathMatch: 'full' },
         // { path: '**', component: PageNotFoundComponent }
       ],

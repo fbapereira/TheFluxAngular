@@ -1,0 +1,71 @@
+<div class="section no-pad-bot " id="index-banner ">
+    <div class="container ">
+        <ul materialize="collapsible" class="collapsible" data-collapsible="accordion">
+            <li>
+                <div class="collapsible-header active ">
+                    <i class="material-icons ">add</i>Nova Movimentação
+                </div>
+                <div class="collapsible-body ">
+                    <div class="row">
+                        <div class="input-field col s8 offset-s2">
+                            <select materialize="material_select">
+                                <option value="" disabled selected>Choose your option</option>
+                                <option value="1">Option 1</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                            </select>
+                            <label>Tipo de Movimentação</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s8 offset-s2">
+                            <select materialize="material_select">
+                                <option value="" disabled selected>Choose your option</option>
+                                <option value="1">Option 1</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                            </select>
+                            <label>Tipo de Pagamento</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s8 offset-s2">
+                            <input id="txtPassword" [(ngModel)]="oUsuario.senha" type="text" class="validate">
+                            <label for="txtPassword">Valor</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s8 offset-s2">
+                            <input id="txtPassword" [(ngModel)]="oUsuario.senha" type="text" class="validate">
+                            <label for="txtPassword">Data</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s8 offset-s2">
+                            <input id="txtPassword" [(ngModel)]="oUsuario.senha" type="text" class="validate">
+                            <label for="txtPassword">Descrição</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s8 offset-s2">
+                            <input type="checkbox" [(ngModel)]="oUsuario.isAdmin" id="test5" />
+                            <label for="test5">É entrada?</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s3 offset-s2">
+                            <a routerLink="/usuario" routerLinkActive="active" class="btn-large waves-effect waves-light purple lighten-4" style="width: 100%">
+                                Voltar
+                            </a>
+                        </div>
+                        <div class="col s3 offset-s2">
+                            <a id="btn_entrar" (click)="btnAdd(oUsuario)" class="btn-large waves-effect waves-light purple darken-3" style="width: 100%">
+                                Entrar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

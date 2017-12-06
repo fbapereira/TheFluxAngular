@@ -20,6 +20,10 @@
                     <a id="mnHistorico " href="report.html" *ngIf="usuarioService.usuario.isAdmin">Relatório</a>
                 </li>
                 <li>
+                    <a routerLink="/tipo-movimentacao" routerLinkActive="active">Tipo de Movimentação</a>
+                </li>
+
+                <li>
                     <a routerLink="/usuario" routerLinkActive="active" *ngIf="usuarioService.usuario.isAdmin">Usuário</a>
                 </li>
                 <li>
@@ -49,6 +53,9 @@
                     </li>
                     <li>
                         <a id="mnHistorico " href="report.html" *ngIf="usuarioService.usuario.isAdmin">Relatório</a>
+                    </li>
+                    <li>
+                        <a routerLink="/tipo-movimentacao" routerLinkActive="active">Tipo de Movimentação</a>
                     </li>
                     <li>
                         <a routerLink="/usuario" routerLinkActive="active" *ngIf="usuarioService.usuario.isAdmin">Usuário</a>

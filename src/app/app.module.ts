@@ -15,6 +15,8 @@ import { MenuComponent } from './menu-component/menu.component';
 import { UsuarioComponent } from './usuario-component/usuario.component';
 import { AddUsuarioComponent } from './add-usuario-component/add-usuario.component';
 import { MaterializeModule } from "angular2-materialize";
+import { TipoMovimentacaoComponent } from './tipo-movimentacao-component/tipo-movimentacao.component';
+import { TipoMovimentacaoService } from '../servicos/tipo-movimentacao.service';
 @NgModule({
   declarations: [
     LoginComponent,
@@ -22,7 +24,8 @@ import { MaterializeModule } from "angular2-materialize";
     AppComponent,
     MenuComponent,
     AddUsuarioComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    TipoMovimentacaoComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,7 @@ import { MaterializeModule } from "angular2-materialize";
         { path: 'login', component: LoginComponent },
         { path: 'dashboard', component: DashboardComponent },
         { path: 'usuario', component: UsuarioComponent },
+        { path: 'tipo-movimentacao', component: TipoMovimentacaoComponent },
         { path: 'add-usuario', component: AddUsuarioComponent },
         { path: '', redirectTo: '/login', pathMatch: 'full' },
         // { path: '**', component: PageNotFoundComponent }
@@ -42,7 +46,7 @@ import { MaterializeModule } from "angular2-materialize";
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [HttpClient, TFHTTPService, UsuarioService],
+  providers: [HttpClient, TFHTTPService, UsuarioService, TipoMovimentacaoService],
   bootstrap: [AppComponent]
 })
 

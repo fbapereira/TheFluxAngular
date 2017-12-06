@@ -1,0 +1,66 @@
+<div class="section no-pad-bot " id="index-banner">
+    <div class="container ">
+        <ul materialize="collapsible" class="collapsible " data-collapsible="accordion ">
+            <li>
+                <div class="collapsible-header active ">
+                    <i class="material-icons ">filter_list</i>Todos
+                </div>
+                <div class="collapsible-body ">
+
+                    <div class="row">
+                        <div class="input-field col s8 offset-s2 ">
+                            <input id="txtBusca" [(ngModel)]="sBusca" placeholder="Buscar" class="validate" (keyup)="changeBusca()">
+
+                        </div>
+                    </div>
+                    <p *ngIf="!tiposMovimentacaoFiltered || tiposMovimentacaoFiltered.length == 0">
+                        Nenhum tipo de movimentacao foi encontrada
+                    </p>
+                    <table *ngIf="tiposMovimentacaoFiltered && tiposMovimentacaoFiltered.length > 0">
+                        <thead>
+                            <tr>
+                                <th width="75%">Nome</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let tipoMovimentacao of tiposMovimentacaoFiltered">
+                                <td>{{tipoMovimentacao.descricao}}</td>
+                                <td>
+                                    <i *ngIf="tipoMovimentacao.isCancelado" class="material-icons" style="cursor: pointer" (click)="ChangeAdmin(tipoMovimentacao, true)">clear</i>
+                                    <i *ngIf="!tipoMovimentacao.isCancelado" class="material-icons" style="cursor: pointer" (click)="ChangeAdmin(tipoMovimentacao, false)">check</i>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="fixed-action-btn ">
+    <a class="btn-floating purple darken-3" (click)="OpenAddStatus(tipoMovimentacao)">
+        <i class="material-icons ">add</i>
+    </a>
+</div>
+
+
+<!-- Modal Structure -->
+<div id="mdlChangePassword" class="modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
+    <div class="modal-content">
+        <h4>Nova Tipo de Movimentação</h4>
+        <div class="row">
+            <div class="input-field col s8 offset-s2">
+                <input id="txtPassword" [(ngModel)]="novoTipo" placeholder="Novo tipo de movimentação" class="validate">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s3 offset-s9">
+                <a id="btn_entrar" (click)="AddStatus(novoTipo)" class="btn-large waves-effect waves-light purple darken-3" style="width: 100%">
+                    Entrar
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

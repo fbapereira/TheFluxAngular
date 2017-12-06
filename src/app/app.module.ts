@@ -19,6 +19,8 @@ import { TipoMovimentacaoComponent } from './tipo-movimentacao-component/tipo-mo
 import { TipoMovimentacaoService } from '../servicos/tipo-movimentacao.service';
 import { AddMovimentacaoComponent } from './add-movimentacao-component/add-movimentacao.component';
 import { AlterarSenhaComponent } from './alterar-senha-component/alterar-senha.component';
+import { TipoPagamentoComponent } from './tipo-pagamento-component/tipo-pagamento.component';
+import { TipoPagamentoService } from '../servicos/tipo-pagamento.service';
 @NgModule({
   declarations: [
     LoginComponent,
@@ -28,8 +30,9 @@ import { AlterarSenhaComponent } from './alterar-senha-component/alterar-senha.c
     AddUsuarioComponent,
     UsuarioComponent,
     TipoMovimentacaoComponent,
-    AddMovimentacaoComponent, 
-    AlterarSenhaComponent
+    AddMovimentacaoComponent,
+    AlterarSenhaComponent,
+    TipoPagamentoComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +46,7 @@ import { AlterarSenhaComponent } from './alterar-senha-component/alterar-senha.c
         { path: 'dashboard', component: DashboardComponent },
         { path: 'usuario', component: UsuarioComponent },
         { path: 'tipo-movimentacao', component: TipoMovimentacaoComponent },
+        { path: 'tipo-pagamento', component: TipoPagamentoComponent },
         { path: 'add-movimentacao', component: AddMovimentacaoComponent },
         { path: 'add-usuario', component: AddUsuarioComponent },
         { path: 'alter-senha', component: AlterarSenhaComponent },
@@ -52,7 +56,7 @@ import { AlterarSenhaComponent } from './alterar-senha-component/alterar-senha.c
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [HttpClient, TFHTTPService, UsuarioService, TipoMovimentacaoService],
+  providers: [HttpClient, TFHTTPService, UsuarioService, TipoMovimentacaoService, TipoPagamentoService],
   bootstrap: [AppComponent]
 })
 

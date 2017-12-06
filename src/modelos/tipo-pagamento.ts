@@ -2,8 +2,9 @@ import { Instituicao } from "./instituicao";
 
 export class TipoPagamento {
     id: number;
-    instituicao: Instituicao;
+    id_instituicao: number;
     nome: string;
-    cobrancaJuros: number;
+    cobranca_Juros: number;
+    is_ativo: boolean;
 
 }

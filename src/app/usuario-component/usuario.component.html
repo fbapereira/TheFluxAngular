@@ -6,7 +6,7 @@
                     <i class="material-icons ">filter_list</i>Todos
                 </div>
                 <div class="collapsible-body ">
-                    <table *ngIf="usuarios && usuarios.length > 0" >
+                    <table *ngIf="usuarios && usuarios.length > 0">
                         <thead>
                             <tr>
                                 <th width="75%">Nome</th>
@@ -17,9 +17,9 @@
                             <tr *ngFor="let usuario of usuarios">
                                 <td>{{usuario.login}}</td>
                                 <td>
-                                    <i class="material-icons" (click)="ChangePassword(usuario)">vpn_key</i>
-                                    <i *ngIf="usuario.isAdmin" class="material-icons" (click)="ChangeAdmin(usuario, false)">star</i>
-                                    <i *ngIf="!usuario.isAdmin" class="material-icons" (click)="ChangeAdmin(usuario, true)">star_border</i>
+                                    <i class="material-icons" (click)="OpenChangePassword(usuario)" style="cursor: pointer">vpn_key</i>
+                                    <i *ngIf="usuario.isAdmin" class="material-icons" style="cursor: pointer" (click)="ChangeAdmin(usuario, false)">star</i>
+                                    <i *ngIf="!usuario.isAdmin" class="material-icons" style="cursor: pointer" (click)="ChangeAdmin(usuario, true)">star_border</i>
                                 </td>
                             </tr>
 
@@ -34,4 +34,27 @@
     <a class="btn-floating purple darken-3" routerLink="/add-usuario" routerLinkActive="active">
         <i class="material-icons ">add</i>
     </a>
+</div>
+
+
+<!-- Modal Structure -->
+<div id="mdlChangePassword" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+    <div class="modal-content">
+        <h4>Nova Senha</h4>
+        <p>Digite a nova senha:</p>
+        <div class="row">
+            <div class="input-field col s8 offset-s2">
+                <input id="txtPassword" [(ngModel)]="senha" type="password" class="validate">
+                <label for="txtPassword">Senha</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s3 offset-s6">
+                <a id="btn_entrar" (click)="ChangePassword(oUsuario)" class="btn-large waves-effect waves-light purple darken-3" style="width: 100%">
+                    Entrar
+                </a>
+            </div>
+        </div>
+    </div>
 </div>

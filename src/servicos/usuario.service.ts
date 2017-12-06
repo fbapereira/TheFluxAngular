@@ -69,4 +69,11 @@ export class UsuarioService {
         return this.http.post("/api/usuario", oUsuario)
             .map((oBody: any) => { return oBody })
     }
+
+    Update(oUsuario: Usuario): Observable<boolean> {
+        let oUsuarioDif: any = oUsuario;
+        oUsuarioDif.id_instituicao = oUsuario.instituicao.id;
+        return this.http.post("/api/UsuarioAtualiza", oUsuario)
+            .map((oBody: any) => { return oBody })
+    }
 }

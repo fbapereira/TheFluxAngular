@@ -3,55 +3,64 @@
         <a id="logo-container" href="#" class="brand-logo center">The Flux</a>
     </div>
 </nav>
+<div class="navbar-fixed hide-on-small-only" *ngIf="usuarioService.usuario">
+    <nav>
+        <div class="nav-wrapper purple darken-3">
+            <ul class="right">
+                <li>
+                    <a routerLink="/dashboard" routerLinkActive="active">Inicio</a>
+                </li>
+                <li>
+                    <a id="mnUsuario " href="AlterarSenha.html">Alterar Senha</a>
+                </li>
+                <li>
+                    <a id="mnHistorico " href="historico.html">Histórico</a>
+                </li>
+                <li>
+                    <a id="mnHistorico " href="report.html" *ngIf="usuarioService.usuario.isAdmin">Relatório</a>
+                </li>
+                <li>
+                    <a routerLink="/usuario" routerLinkActive="active" *ngIf="usuarioService.usuario.isAdmin">Usuário</a>
+                </li>
+                <li>
+                    <a id="mnSair" (click)="LogOut()">Sair</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
 
-<nav class="purple darken-3" role="navigation" *ngIf="usuarioService.usuario">
-    <div class="nav-wrapper container">
-        <a id="logo-container" href="#" class="brand-logo left hide-on-med-and-down">The Flux</a>
-        <a href="#" data-activates="mobile-demo " class="button-collapse ">
+<nav class="hide-on-med-and-up purple darken-3" *ngIf="usuarioService.usuario">
+    <div class="container">
+        <ul id="slide-out" class="side-nav fixed">
+            <li class="logo" style="text-align: center;">
+                The Flux
+            </li>
+            <li class="no-padding">
+                <ul>
+                    <li>
+                        <a routerLink="/dashboard" routerLinkActive="active">Inicio</a>
+                    </li>
+                    <li>
+                        <a id="mnUsuario " href="AlterarSenha.html">Alterar Senha</a>
+                    </li>
+                    <li>
+                        <a id="mnHistorico " href="historico.html">Histórico</a>
+                    </li>
+                    <li>
+                        <a id="mnHistorico " href="report.html" *ngIf="usuarioService.usuario.isAdmin">Relatório</a>
+                    </li>
+                    <li>
+                        <a routerLink="/usuario" routerLinkActive="active" *ngIf="usuarioService.usuario.isAdmin">Usuário</a>
+                    </li>
+                    <li>
+                        <a id="mnSair" (click)="LogOut()">Sair</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <a href="#" materialize="sideNav" [materializeParams]="[{edge:'left'}]" data-activates="slide-out" class="button-collapse">
             <i class="material-icons ">menu</i>
         </a>
-        <ul class="right hide-on-med-and-down ">
-            <li>
-                <a routerLink="/dashboard" routerLinkActive="active">Inicio</a>
-            </li>
-            <li>
-                <a id="mnUsuario " href="AlterarSenha.html">Alterar Senha</a>
-            </li>
-            <li>
-                <a id="mnHistorico " href="historico.html">Histórico</a>
-            </li>
-            <li>
-                <a id="mnHistorico " href="report.html" *ngIf="usuarioService.usuario.isAdmin">Relatório</a>
-            </li>
-            <li>
-                <a routerLink="/usuario" routerLinkActive="active" *ngIf="usuarioService.usuario.isAdmin">Usuário</a>
-            </li>
-            <li>
-                <a id="mnSair" (click)="LogOut()">Sair</a>
-            </li>
-        </ul>
-        <ul class="side-nav " id="mobile-demo ">
-            <li>
-                <a routerLink="/dashboard" routerLinkActive="active">Inicio</a>
-            </li>
-            <li>
-                <a id="mmUsuario " href="AlterarSenha.html ">Alterar Senha</a>
-            </li>
-            <li>
-                <a id="mnHistorico " href="historico.html ">Histórico</a>
-            </li>
-            <li>
-                <a id="mmHistorico " href="report.html " *ngIf="usuarioService.usuario.isAdmin">Relatório</a>
-            </li>
-            <li>
-                <a routerLink="/usuario" routerLinkActive="active" *ngIf="usuarioService.usuario.isAdmin">Usuário</a>
-            </li>
-            <li>
-                <a id="mmSair" (click)="LogOut() ">Sair</a>
-            </li>
-        </ul>
-
-
-
     </div>
 </nav>

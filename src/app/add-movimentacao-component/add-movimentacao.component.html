@@ -6,43 +6,46 @@
                     <i class="material-icons ">add</i>Nova Movimentação
                 </div>
                 <div class="collapsible-body ">
+
+
                     <div class="row">
-                        <div class="input-field col s8 offset-s2">
-                            <select materialize="material_select">
-                                <option value="" disabled selected>Choose your option</option>
-                                <option value="1">Option 1</option>
-                                <option value="2">Option 2</option>
-                                <option value="3">Option 3</option>
+                        <div class="input-field col s8 offset-s2" *ngIf="tipoMovimentacaos.length > 0">
+                            <select materialize="material_select" [materializeSelectOptions]="selectOptions">
+                                <option value="" disabled selected>Escolha o tipo de movimentação</option>
+                                <option *ngFor="let option of tipoMovimentacaos" [value]="option.id">{{option.descricao}}</option>
                             </select>
                             <label>Tipo de Movimentação</label>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s8 offset-s2">
-                            <select materialize="material_select">
-                                <option value="" disabled selected>Choose your option</option>
-                                <option value="1">Option 1</option>
-                                <option value="2">Option 2</option>
-                                <option value="3">Option 3</option>
+                        <div class="input-field col s8 offset-s2" *ngIf="tipoPagamentos.length > 0">
+                            <select materialize="material_select" [materializeSelectOptions]="selectOptions">
+                                <option value="" disabled selected>Escolha o tipo de pagamento</option>
+                                <option *ngFor="let pag of tipoPagamentos" [value]="pag.id">{{pag.nome}}</option>
                             </select>
                             <label>Tipo de Pagamento</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s8 offset-s2">
-                            <input id="txtPassword" [(ngModel)]="oUsuario.senha" type="text" class="validate">
+                            <input id="txtPassword" type="number" step="0.01" min="0.01" class="validate">
                             <label for="txtPassword">Valor</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s8 offset-s2">
-                            <input id="txtPassword" [(ngModel)]="oUsuario.senha" type="text" class="validate">
-                            <label for="txtPassword">Data</label>
+                            <input id="txtPassword" type="date" placeholder="Data" class="validate">
                         </div>
                     </div>
                     <div class="row">
+                            <div class="input-field col s8 offset-s2">
+                                <input id="txtPassword" type="number" step="1" max="24" class="validate">
+                                <label for="txtPassword">Repetir movimentacao</label>
+                            </div>
+                        </div>
+                    <div class="row">
                         <div class="input-field col s8 offset-s2">
-                            <input id="txtPassword" [(ngModel)]="oUsuario.senha" type="text" class="validate">
+                            <input id="txtPassword" type="text" class="validate">
                             <label for="txtPassword">Descrição</label>
                         </div>
                     </div>
@@ -54,7 +57,7 @@
                     </div>
                     <div class="row">
                         <div class="col s3 offset-s2">
-                            <a routerLink="/usuario" routerLinkActive="active" class="btn-large waves-effect waves-light purple lighten-4" style="width: 100%">
+                            <a routerLink="/dashboard" routerLinkActive="active" class="btn-large waves-effect waves-light purple lighten-4" style="width: 100%">
                                 Voltar
                             </a>
                         </div>

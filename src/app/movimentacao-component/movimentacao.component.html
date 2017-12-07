@@ -1,6 +1,7 @@
 <table id="tblServico " class="responsive-table" *ngIf="lstMovimentacao && lstMovimentacao.length > 0">
     <thead>
         <tr>
+            <th>Descrição</th>
             <th>Data</th>
             <th>valor</th>
             <th></th>
@@ -9,13 +10,79 @@
     <tbody>
 
         <tr *ngFor="let movimentacao of lstMovimentacao">
+            <td>{{(movimentacao.descricao.length>12)? (movimentacao.descricao | slice:0:12)+'...':(movimentacao.descricao )}}
+            </td>
             <td>{{movimentacao.data | date : "dd/MM/yyyy"}}</td>
             <td>{{(movimentacao.valor | NumberToStringFormat: 2:'R$ ': '':',':'.') }} </td>
             <td>
-                <i class="material-icons" (click)="OpenChangePassword(usuario)" style="cursor: pointer">edit</i>
-                <i class="material-icons" (click)="OpenChangePassword(usuario)" style="cursor: pointer">info</i>
-                <i class="material-icons" (click)="OpenChangePassword(usuario)" style="cursor: pointer">close</i>
+                <i class="material-icons" (click)="ShowDetail(movimentacao)" style="cursor: pointer">info</i>
+                <i class="material-icons" (click)="Cancel(movimentacao)" style="cursor: pointer">close</i>
             </td>
         </tr>
     </tbody>
 </table>
+
+<!-- Modal Structure -->
+<div id="mdlChangePassword" *ngIf="this.targetMovimentacao" class="modal" materialize="modal" [materializeParams]="[{dismissible: true}]"
+    [materializeActions]="modalActions">
+    <div class="modal-content">
+        <h4>Detalhes da Movimentação</h4>
+        <br />
+        <br />
+        <div class="row">
+            <div class="input-field col s8 offset-s2" *ngIf="tipoMovimentacaos.length > 0">
+                <select materialize="material_select" [materializeSelectOptions]="selectOptions" [(ngModel)]="this.targetMovimentacao.tipoMovimentacao.id"
+                    disabled>
+                    <option value="" disabled selected>Escolha o tipo de movimentação</option>
+                    <option *ngFor="let option of tipoMovimentacaos" [value]="option.id">{{option.descricao}}</option>
+                </select>
+                <label>Tipo de Movimentação</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s8 offset-s2" *ngIf="tipoPagamentos.length > 0">
+                <select materialize="material_select" [materializeSelectOptions]="selectOptions" [(ngModel)]="this.targetMovimentacao.tipoPagamento.id"
+                    disabled>
+                    <option value="" disabled selected>Escolha o tipo de pagamento</option>
+                    <option *ngFor="let pag of tipoPagamentos" [value]="pag.id">{{pag.nome}}</option>
+                </select>
+                <label>Tipo de Pagamento</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s8 offset-s2" *ngIf="usuarios.length > 0">
+                <select materialize="material_select" [materializeSelectOptions]="selectOptions" [(ngModel)]="this.targetMovimentacao.usuario.id"
+                    disabled>
+                    <option value="" disabled selected>Escolha o usuario</option>
+                    <option *ngFor="let usu of usuarios" [value]="usu.id">{{usu.login}}</option>
+                </select>
+                <label>Tipo de Pagamento</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s8 offset-s2">
+                <input id="txtValor" placeholder="#" type="number" step="0.01" min="0.01" class="validate" [(ngModel)]="this.targetMovimentacao.valor"
+                    disabled>
+                <label for="txtValor">Valor</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s8 offset-s2">
+                <input id="txtDate" type="date" placeholder="Data" class="validate" [ngModel]="this.targetMovimentacao.data | date:'yyyy-MM-dd'"
+                    (ngModelChange)="this.targetMovimentacao.data = $event" disabled>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s8 offset-s2">
+                <input id="txtDescription" placeholder="#" type="text" class="validate" [(ngModel)]="this.targetMovimentacao.descricao" disabled>
+                <label for="txtDescription">Descrição</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s8 offset-s2">
+                <input type="checkbox" placeholder="#" id="test5" [(ngModel)]="this.targetMovimentacao.isEntrada" disabled />
+                <label for="test5">É entrada?</label>
+            </div>
+        </div>
+    </div>
+</div>

@@ -21,7 +21,15 @@ export class DashboardComponent {
         private movimentacaoService: MovimentacaoService,
         private usuarioService: UsuarioService) {
         this.oUsuario = this.usuarioService.usuario;
+        this.popular();
+        this.movimentacaoService.hasChange
+            .subscribe(() => {
+                this.popular();
+            })
 
+    }
+
+    popular(): void {
         this.movimentacaoService.Obtem(this.oUsuario)
             .subscribe((movimentacaos: Movimentacao[]) => {
                 this.movimentacaos = movimentacaos;
@@ -39,7 +47,5 @@ export class DashboardComponent {
                 debugger;
             });
     }
-
-
 }
 

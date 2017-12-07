@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 
 import { Movimentacao } from '../modelos/movimentacao';
 import { Observable } from 'rxjs';
@@ -12,12 +12,14 @@ import { TipoPagamento } from '../modelos/tipo-pagamento';
 @Injectable()
 export class MovimentacaoService {
     constructor(private http: TFHTTPService) { }
+    hasChange: EventEmitter<boolean> = new EventEmitter();
 
     Obtem(oUsuario: Usuario): Observable<Movimentacao[]> {
         return this.http.post("/api/MovimentacaoPessoal_Obtem", oUsuario)
             .map((movimentacaos: any) => {
                 let movimentacaosRetorno: Movimentacao[] = [];
 
+                if (!movimentacaos) { return []; }
                 movimentacaos.forEach((movimentacao: any) => {
                     let movimentacaoRetorno: Movimentacao = new Movimentacao();
                     movimentacaoRetorno.data = movimentacao.data;
@@ -66,11 +68,30 @@ export class MovimentacaoService {
             serviceArray.push(this.http.post("/api/MovimentacaoPessoal_Adicionar", mov));
         })
 
+        let _that: any = this;
         return Observable.create(function (observer) {
-            Observable.forkJoin(serviceArray).subscribe(() => {
-                observer.next(true);
-                observer.complete();
-            });
+            Observable.forkJoin(serviceArray)
+                .flatMap((a: any) => {
+                    _that.hasChange.emit(true);
+                    return a;
+                })
+                .subscribe(() => {
+                    observer.next(true);
+                    observer.complete();
+                });
         })
+    }
+
+    Remove(oMovimentacao: Movimentacao): Observable<any> {
+        let that: any = this;
+        return Observable.create(function (observer) {
+
+            that.http.post("/api/Movimentacao_Deletar", oMovimentacao)
+                .subscribe(() => {
+                    that.hasChange.emit(true);
+                    observer.next(true);
+                    observer.complete();
+                });
+        });
     }
 }

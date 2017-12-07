@@ -17,6 +17,7 @@ import { debounce } from 'rxjs/operator/debounce';
 export class TipoMovimentacaoComponent {
     novoTipo: string;
     sBusca: string;
+    bAtivos: boolean;
     oUsuario: Usuario;
     tipoMovimentacao: TipoMovimentacao;
     tiposMovimentacao: TipoMovimentacao[] = [];
@@ -31,6 +32,8 @@ export class TipoMovimentacaoComponent {
         private router: Router) {
         this.oUsuario = this.usuarioService.usuario;
         this.Populate();
+        this.bAtivos = true;
+        this.sBusca = "";
     }
 
     OpenAddStatus(tipoMovimentacao: TipoMovimentacao): void {
@@ -83,9 +86,18 @@ export class TipoMovimentacaoComponent {
     }
 
     changeBusca(): void {
-        if (this.sBusca || this.sBusca.length == 0) { this.tiposMovimentacaoFiltered = this.tiposMovimentacao; }
         this.tiposMovimentacaoFiltered = this.tiposMovimentacao.filter((a: TipoMovimentacao) => {
-            return a.descricao.toUpperCase().indexOf(this.sBusca.toUpperCase()) > -1;
+            debugger;
+            //valida nome
+            if ((this.sBusca || this.sBusca.length == 0) &&
+                (a.descricao.toUpperCase().indexOf(this.sBusca.toUpperCase()) == -1)) {
+                return false;
+            }
+            //valida cancelado
+            if (this.bAtivos && a.isCancelado) {
+                return false;
+            }
+            return true;
         });
     }
 

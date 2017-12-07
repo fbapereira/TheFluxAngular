@@ -10,6 +10,12 @@
                     <div class="row">
                         <div class="input-field col s8 offset-s2 ">
                             <input id="txtBusca" [(ngModel)]="sBusca" placeholder="Buscar" class="validate" (keyup)="changeBusca()">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class=" col s4 offset-s2 ">
+                            <input type="checkbox" id="test5" [(ngModel)]="bAtivos" (change)="changeBusca()" />
+                            <label for="test5">Apenas ativos?</label>
 
                         </div>
                     </div>

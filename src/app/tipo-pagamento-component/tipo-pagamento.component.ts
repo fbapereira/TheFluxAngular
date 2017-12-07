@@ -21,10 +21,15 @@ export class TipoPagamentoComponent {
 
     oUsuario: Usuario;
 
+    sBusca: string;
+    bAtivos: boolean;
+
     tipoPagamento: TipoPagamento;
     tiposPagamento: TipoPagamento[] = [];
+    tiposPagamentoFiltered: TipoPagamento[] = [];
 
     modalActions = new EventEmitter<MaterializeAction>();
+
 
     constructor(
         private usuarioService: UsuarioService,
@@ -33,6 +38,8 @@ export class TipoPagamentoComponent {
         private router: Router) {
         this.oUsuario = this.usuarioService.usuario;
         this.Populate();
+        this.bAtivos = true;
+        this.sBusca = "";
     }
 
     OpenAddStatus(tipoPagamento: TipoPagamento): void {
@@ -67,7 +74,7 @@ export class TipoPagamentoComponent {
 
 
         this.tipoPagamento = new TipoPagamento();
-        this.tipoPagamento.id_instituicao= this.oUsuario.instituicao.id;
+        this.tipoPagamento.id_instituicao = this.oUsuario.instituicao.id;
 
         this.tipoPagamento.cobranca_Juros = this.juros;
         this.tipoPagamento.nome = this.nome;
@@ -92,6 +99,24 @@ export class TipoPagamentoComponent {
         this.tipoPagamentoService.Get(this.oUsuario.instituicao.id)
             .subscribe((tiposPagamento: TipoPagamento[]) => {
                 this.tiposPagamento = tiposPagamento;
+                this.changeBusca();
             });
+    }
+
+
+    changeBusca(): void {
+        this.tiposPagamentoFiltered = this.tiposPagamento.filter((a: TipoPagamento) => {
+            debugger;
+            //valida nome
+            if ((this.sBusca || this.sBusca.length == 0) &&
+                (a.nome.toUpperCase().indexOf(this.sBusca.toUpperCase()) == -1)) {
+                return false;
+            }
+            //valida cancelado
+            if (this.bAtivos && !a.is_ativo) {
+                return false;
+            }
+            return true;
+        });
     }
 }

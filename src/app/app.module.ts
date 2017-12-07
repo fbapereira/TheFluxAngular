@@ -21,6 +21,8 @@ import { AddMovimentacaoComponent } from './add-movimentacao-component/add-movim
 import { AlterarSenhaComponent } from './alterar-senha-component/alterar-senha.component';
 import { TipoPagamentoComponent } from './tipo-pagamento-component/tipo-pagamento.component';
 import { TipoPagamentoService } from '../servicos/tipo-pagamento.service';
+import { MovimentacaoService } from '../servicos/movimentacao.service';
+import {MomentModule} from 'angular2-moment/moment.module';
 @NgModule({
   declarations: [
     LoginComponent,
@@ -36,6 +38,7 @@ import { TipoPagamentoService } from '../servicos/tipo-pagamento.service';
   ],
   imports: [
     BrowserModule,
+    MomentModule,
     MaterializeModule,
     HttpClientModule,
     FormsModule,
@@ -56,7 +59,7 @@ import { TipoPagamentoService } from '../servicos/tipo-pagamento.service';
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [HttpClient, TFHTTPService, UsuarioService, TipoMovimentacaoService, TipoPagamentoService],
+  providers: [HttpClient, TFHTTPService, UsuarioService, TipoMovimentacaoService, TipoPagamentoService, MovimentacaoService],
   bootstrap: [AppComponent]
 })
 

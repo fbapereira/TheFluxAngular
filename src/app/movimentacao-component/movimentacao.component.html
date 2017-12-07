@@ -1,3 +1,19 @@
+<div *ngIf="hasSearch">
+    <div class="row">
+        <div class="input-field col s8 offset-s2 ">
+            <input id="txtBusca" [(ngModel)]="sBusca" placeholder="Buscar" class="validate" (keyup)="changeBusca()">
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s4 offset-s2 ">
+            <input id="txtBusca" [(ngModel)]="sMin" placeholder="Valor Minimo" class="validate" (keyup)="changeBusca()">
+        </div>
+        <div class="input-field col s4  ">
+            <input id="txtBusca" [(ngModel)]="sMax" placeholder="Valor Maximo" class="validate" (keyup)="changeBusca()">
+        </div>
+    </div>
+</div>
+
 <table id="tblServico " class="responsive-table" *ngIf="lstMovimentacao && lstMovimentacao.length > 0">
     <thead>
         <tr>
@@ -9,7 +25,7 @@
     </thead>
     <tbody>
 
-        <tr *ngFor="let movimentacao of lstMovimentacao">
+        <tr *ngFor="let movimentacao of lstMovimentacaoFiltered">
             <td>{{(movimentacao.descricao.length>12)? (movimentacao.descricao | slice:0:12)+'...':(movimentacao.descricao )}}
             </td>
             <td>{{movimentacao.data | date : "dd/MM/yyyy"}}</td>

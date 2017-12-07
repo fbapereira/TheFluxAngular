@@ -1,5 +1,5 @@
 
-import { Component, EventEmitter, Input } from '@angular/core';
+import { Component, EventEmitter, Input, SimpleChanges } from '@angular/core';
 import { Usuario } from '../../modelos/usuario';
 import { ToasterService } from 'angular2-toaster';
 import { RouterModule, Router } from '@angular/router';
@@ -21,7 +21,11 @@ import { TipoPagamento } from '../../modelos/tipo-pagamento';
 export class MovimentacaoComponent {
 
     @Input()
+    hasSearch: Boolean;
+
+    @Input()
     lstMovimentacao: Movimentacao[];
+    lstMovimentacaoFiltered: Movimentacao[];
 
     oUsuario: Usuario;
     id: number;
@@ -70,6 +74,7 @@ export class MovimentacaoComponent {
             .subscribe((e: boolean) => {
                 this.toasterService.pop('sucess', "Movimentação cancelada com sucesso");
                 this.lstMovimentacao = this.lstMovimentacao.filter((_mov: Movimentacao) => { return _mov.id != mov.id })
+                this.lstMovimentacaoFiltered = this.lstMovimentacaoFiltered.filter((_mov: Movimentacao) => { return _mov.id != mov.id })
             },
             (e: any) => {
                 this.toasterService.pop('success', 'Não foi possivel realizar a operação.');
@@ -78,7 +83,30 @@ export class MovimentacaoComponent {
 
             });
 
-
+    }
+    ngOnChanges(changes: SimpleChanges) {
+        this.changeBusca();
     }
 
+    sBusca: string = "";
+    sMin: string;
+    sMax: string;
+    sUsuario: string;
+    changeBusca(): void {
+        if (!this.lstMovimentacao) return
+        this.lstMovimentacaoFiltered = this.lstMovimentacao.filter((_mov: Movimentacao) => {
+            debugger;
+            //descricao 
+            if (this.sBusca && this.sBusca != "" && _mov.descricao.indexOf(this.sBusca) == -1) { return false }
+
+            // valida min 
+            if (this.sMin && this.sMin != "" && _mov.valor < Number(this.sMin)) { return false }
+
+            // valida max
+            if (this.sMax && this.sMax != "" && _mov.valor > Number(this.sMax)) { return false }
+
+            return true;
+        })
+
+    }
 }

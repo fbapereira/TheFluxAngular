@@ -8,15 +8,15 @@
                 <div class="collapsible-body ">
                     <p>
                         <b>Entrada</b>:
-                        <label> R$ 500,00</label>
+                        <label> {{(entrada | NumberToStringFormat: 2:'R$ ': '':',':'.') }}</label>
                     </p>
                     <p>
                         <b>Saída</b>:
-                        <label> R$ 200,00</label>
+                        <label> {{(saida | NumberToStringFormat: 2:'R$ ': '':',':'.') }} </label>
                     </p>
                     <p>
                         <b>Caixa</b>:
-                        <label> R$ 300,00</label>
+                        <label> {{(total | NumberToStringFormat: 2:'R$ ': '':',':'.') }} </label>
                     </p>
 
                 </div>
@@ -27,36 +27,7 @@
                 </div>
                 <div class="collapsible-body ">
 
-                    <table id="tblServico " class="responsive-table ">
-                        <thead>
-                            <tr>
-                                <th>Usuário</th>
-                                <th>Entrada</th>
-                                <th>valor</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Marcia</td>
-                                <td>Mensalidade Fabio</td>
-                                <td>R$250,00</td>
-                                <td>remover</td>
-                            </tr>
-                            <tr>
-                                <td>Marcia</td>
-                                <td>Mensalidade Thiago</td>
-                                <td>R$250,00</td>
-                                <td>remover</td>
-                            </tr>
-                            <tr>
-                                <td>Marcia</td>
-                                <td>Alimentos</td>
-                                <td>R$-200,00</td>
-                                <td>remover</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <u2x-tf-movimentacao [lstMovimentacao]="movimentacaos"></u2x-tf-movimentacao>
                 </div>
             </li>
         </ul>

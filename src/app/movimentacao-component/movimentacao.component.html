@@ -1,0 +1,21 @@
+<table id="tblServico " class="responsive-table" *ngIf="lstMovimentacao && lstMovimentacao.length > 0">
+    <thead>
+        <tr>
+            <th>Data</th>
+            <th>valor</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr *ngFor="let movimentacao of lstMovimentacao">
+            <td>{{movimentacao.data | date : "dd/MM/yyyy"}}</td>
+            <td>{{(movimentacao.valor | NumberToStringFormat: 2:'R$ ': '':',':'.') }} </td>
+            <td>
+                <i class="material-icons" (click)="OpenChangePassword(usuario)" style="cursor: pointer">edit</i>
+                <i class="material-icons" (click)="OpenChangePassword(usuario)" style="cursor: pointer">info</i>
+                <i class="material-icons" (click)="OpenChangePassword(usuario)" style="cursor: pointer">close</i>
+            </td>
+        </tr>
+    </tbody>
+</table>

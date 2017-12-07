@@ -22,7 +22,9 @@ import { AlterarSenhaComponent } from './alterar-senha-component/alterar-senha.c
 import { TipoPagamentoComponent } from './tipo-pagamento-component/tipo-pagamento.component';
 import { TipoPagamentoService } from '../servicos/tipo-pagamento.service';
 import { MovimentacaoService } from '../servicos/movimentacao.service';
-import {MomentModule} from 'angular2-moment/moment.module';
+import { MomentModule } from 'angular2-moment/moment.module';
+import { NumberToStringPipe } from '../pipes/NumberToString.Pipe';
+import { MovimentacaoComponent } from './movimentacao-component/movimentacao.component';
 @NgModule({
   declarations: [
     LoginComponent,
@@ -34,7 +36,9 @@ import {MomentModule} from 'angular2-moment/moment.module';
     TipoMovimentacaoComponent,
     AddMovimentacaoComponent,
     AlterarSenhaComponent,
-    TipoPagamentoComponent
+    TipoPagamentoComponent,
+    MovimentacaoComponent,
+    NumberToStringPipe
   ],
   imports: [
     BrowserModule,
@@ -60,6 +64,7 @@ import {MomentModule} from 'angular2-moment/moment.module';
     )
   ],
   providers: [HttpClient, TFHTTPService, UsuarioService, TipoMovimentacaoService, TipoPagamentoService, MovimentacaoService],
+  exports: [NumberToStringPipe],
   bootstrap: [AppComponent]
 })
 

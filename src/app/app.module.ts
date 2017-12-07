@@ -25,6 +25,7 @@ import { MovimentacaoService } from '../servicos/movimentacao.service';
 import { MomentModule } from 'angular2-moment/moment.module';
 import { NumberToStringPipe } from '../pipes/NumberToString.Pipe';
 import { MovimentacaoComponent } from './movimentacao-component/movimentacao.component';
+import { HistoricoComponent } from './historico-component/historico.component';
 @NgModule({
   declarations: [
     LoginComponent,
@@ -38,6 +39,7 @@ import { MovimentacaoComponent } from './movimentacao-component/movimentacao.com
     AlterarSenhaComponent,
     TipoPagamentoComponent,
     MovimentacaoComponent,
+    HistoricoComponent,
     NumberToStringPipe
   ],
   imports: [
@@ -57,6 +59,7 @@ import { MovimentacaoComponent } from './movimentacao-component/movimentacao.com
         { path: 'add-movimentacao', component: AddMovimentacaoComponent },
         { path: 'add-usuario', component: AddUsuarioComponent },
         { path: 'alter-senha', component: AlterarSenhaComponent },
+        { path: 'historico', component: HistoricoComponent },
         { path: '', redirectTo: '/login', pathMatch: 'full' },
         // { path: '**', component: PageNotFoundComponent }
       ],

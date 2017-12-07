@@ -21,16 +21,21 @@ export class UsuarioComponent {
         private toasterService: ToasterService,
         private router: Router) {
 
-        this.oUsuario = new Usuario();
+        this.oUsuario = this.usuarioService.usuario;
         this.Populate();
     }
 
     Populate(): void {
-        this.usuarioService.Get(this.usuarioService.usuario.instituicao.id)
-            .subscribe((usuarios: Usuario[]) => {
-                this.usuarios = usuarios;
-
-            });
+        debugger;
+        if (this.oUsuario.isAdmin) {
+            this.usuarioService.Get(this.usuarioService.usuario.instituicao.id)
+                .subscribe((usuarios: Usuario[]) => {
+                    this.usuarios = usuarios;
+                });
+        } else {
+            this.usuarios = [];
+            this.usuarios.push(this.oUsuario);
+        }
     }
 
     ChangeAdmin(usuario: Usuario, toAdmin: boolean): void {

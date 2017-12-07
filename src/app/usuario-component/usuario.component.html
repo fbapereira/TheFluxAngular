@@ -18,11 +18,10 @@
                                 <td>{{usuario.login}}</td>
                                 <td>
                                     <i class="material-icons" (click)="OpenChangePassword(usuario)" style="cursor: pointer">vpn_key</i>
-                                    <i *ngIf="usuario.isAdmin" class="material-icons" style="cursor: pointer" (click)="ChangeAdmin(usuario, false)">star</i>
-                                    <i *ngIf="!usuario.isAdmin" class="material-icons" style="cursor: pointer" (click)="ChangeAdmin(usuario, true)">star_border</i>
+                                    <i *ngIf="usuarioService.usuario.isAdmin && usuario.isAdmin " class="material-icons" style="cursor: pointer" (click)="ChangeAdmin(usuario, false)">star</i>
+                                    <i *ngIf=" usuarioService.usuario.isAdmin && !usuario.isAdmin" class="material-icons" style="cursor: pointer" (click)="ChangeAdmin(usuario, true)">star_border</i>
                                 </td>
                             </tr>
-
                         </tbody>
                     </table>
                 </div>
@@ -40,19 +39,17 @@
 <!-- Modal Structure -->
 <div id="mdlChangePassword" class="modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
     <div class="modal-content">
-        <h4>Nova Senha</h4>
         <p>Digite a nova senha:</p>
         <div class="row">
-            <div class="input-field col s8 offset-s2">
+            <div class="input-field col s10 offset-s1">
                 <input id="txtPassword" [(ngModel)]="senha" type="password" class="validate">
                 <label for="txtPassword">Senha</label>
             </div>
         </div>
-
         <div class="row">
-            <div class="col s3 offset-s6">
-                <a id="btn_entrar" (click)="ChangePassword(oUsuario)" class="btn-large waves-effect waves-light purple darken-3" style="width: 100%">
-                    Entrar
+            <div class="col s4 offset-s7">
+                <a (click)="ChangePassword(oUsuario)" class="btn-large waves-effect waves-light purple darken-3" style="width: 100%">
+                    Alterar
                 </a>
             </div>
         </div>

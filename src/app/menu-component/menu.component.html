@@ -10,15 +10,15 @@
                 <li>
                     <a routerLink="/dashboard" routerLinkActive="active">Inicio</a>
                 </li>
-                <li>
+                <!-- <li>
                     <a routerLink="/alter-senha" routerLinkActive="active">Alterar Senha</a>
-                </li>
+                </li> -->
                 <li>
                     <a routerLink="/historico" routerLinkActive="active">Histórico</a>
                 </li>
-                <li>
+                <!-- <li>
                     <a id="mnHistorico " href="report.html" *ngIf="usuarioService.usuario.isAdmin">Relatório</a>
-                </li>
+                </li> -->
                 <li>
                     <a routerLink="/tipo-movimentacao" routerLinkActive="active">Tipo de Movimentação</a>
                 </li>
@@ -26,7 +26,7 @@
                     <a routerLink="/tipo-pagamento" routerLinkActive="active">Tipo de Pagamento</a>
                 </li>
                 <li>
-                    <a routerLink="/usuario" routerLinkActive="active" *ngIf="usuarioService.usuario.isAdmin">Usuário</a>
+                    <a routerLink="/usuario" routerLinkActive="active" >Usuário</a>
                 </li>
                 <li>
                     <a id="mnSair" (click)="LogOut()">Sair</a>
@@ -47,15 +47,15 @@
                     <li>
                         <a routerLink="/dashboard" routerLinkActive="active">Inicio</a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a routerLink="/alter-senha" routerLinkActive="active">Alterar Senha</a>
-                    </li>
+                    </li> -->
                     <li>
                         <a routerLink="/historico" routerLinkActive="active">Histórico</a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a id="mnHistorico " href="report.html" *ngIf="usuarioService.usuario.isAdmin">Relatório</a>
-                    </li>
+                    </li> -->
                     <li>
                         <a routerLink="/tipo-movimentacao" routerLinkActive="active">Tipo de Movimentação</a>
                     </li>
@@ -63,7 +63,7 @@
                         <a routerLink="/tipo-pagamento" routerLinkActive="active">Tipo de Pagamento</a>
                     </li>
                     <li>
-                        <a routerLink="/usuario" routerLinkActive="active" *ngIf="usuarioService.usuario.isAdmin">Usuário</a>
+                        <a routerLink="/usuario" routerLinkActive="active" >Usuário</a>
                     </li>
                     <li>
                         <a id="mnSair" (click)="LogOut()">Sair</a>

@@ -26,6 +26,7 @@ import { MomentModule } from 'angular2-moment/moment.module';
 import { NumberToStringPipe } from '../pipes/NumberToString.Pipe';
 import { MovimentacaoComponent } from './movimentacao-component/movimentacao.component';
 import { HistoricoComponent } from './historico-component/historico.component';
+import { LoaderComponent } from './loader-component/loader.component';
 @NgModule({
   declarations: [
     LoginComponent,
@@ -40,6 +41,7 @@ import { HistoricoComponent } from './historico-component/historico.component';
     TipoPagamentoComponent,
     MovimentacaoComponent,
     HistoricoComponent,
+    LoaderComponent,
     NumberToStringPipe
   ],
   imports: [

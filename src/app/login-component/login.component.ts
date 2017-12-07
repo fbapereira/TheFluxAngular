@@ -38,6 +38,7 @@ export class LoginComponent {
     }
 
     executaLogin(usuario: Usuario): void {
+        debugger;
         this.usuarioService.Login(usuario)
             .catch((a, e) => {
                 this.toasterService.pop('success', 'Não foi possivel realizar o login');

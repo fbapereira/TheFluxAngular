@@ -87,7 +87,7 @@ export class TipoMovimentacaoComponent {
 
     changeBusca(): void {
         this.tiposMovimentacaoFiltered = this.tiposMovimentacao.filter((a: TipoMovimentacao) => {
-            debugger;
+             
             //valida nome
             if ((this.sBusca || this.sBusca.length == 0) &&
                 (a.descricao.toUpperCase().indexOf(this.sBusca.toUpperCase()) == -1)) {

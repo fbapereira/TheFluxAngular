@@ -106,7 +106,7 @@ export class TipoPagamentoComponent {
 
     changeBusca(): void {
         this.tiposPagamentoFiltered = this.tiposPagamento.filter((a: TipoPagamento) => {
-            debugger;
+             
             //valida nome
             if ((this.sBusca || this.sBusca.length == 0) &&
                 (a.nome.toUpperCase().indexOf(this.sBusca.toUpperCase()) == -1)) {

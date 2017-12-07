@@ -6,6 +6,12 @@
                     <i class="material-icons ">filter_list</i>Todos
                 </div>
                 <div class="collapsible-body ">
+                    <div class="row">
+                        <div class="input-field col s8 offset-s2 ">
+                            <input id="txtBusca" [(ngModel)]="sBusca" placeholder="Buscar" class="validate" (keyup)="changeBusca()">
+                        </div>
+                    </div>
+
                     <table *ngIf="usuarios && usuarios.length > 0">
                         <thead>
                             <tr>
@@ -14,7 +20,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let usuario of usuarios">
+                            <tr *ngFor="let usuario of usuariosFiltered">
                                 <td>{{usuario.login}}</td>
                                 <td>
                                     <i class="material-icons" (click)="OpenChangePassword(usuario)" style="cursor: pointer">vpn_key</i>

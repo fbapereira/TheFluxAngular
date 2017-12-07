@@ -11,8 +11,16 @@
                         <label> {{(entrada | NumberToStringFormat: 2:'R$ ': '':',':'.') }}</label>
                     </p>
                     <p>
+                        <b> Juros Entrada</b>:
+                        <label> {{(jurosEntrada | NumberToStringFormat: 2:'R$ ': '':',':'.') }}</label>
+                    </p>
+                    <p>
                         <b>Saída</b>:
                         <label> {{(saida | NumberToStringFormat: 2:'R$ ': '':',':'.') }} </label>
+                    </p>
+                    <p>
+                        <b>Juros Saída</b>:
+                        <label> {{(jurosSaida | NumberToStringFormat: 2:'R$ ': '':',':'.') }} </label>
                     </p>
                     <p>
                         <b>Caixa</b>:

@@ -48,7 +48,7 @@ export class MovimentacaoService {
         obj.idUsuario = oTipoMovimentacao.usuario.id;
 
         let movimentacaos: Movimentacao[] = [];
-        debugger;
+         
         for (var _i = 0; _i < oTipoMovimentacao.repetir; _i++) {
             let sendData: any = new Movimentacao();
 

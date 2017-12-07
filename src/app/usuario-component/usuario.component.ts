@@ -13,28 +13,31 @@ import { Observable } from 'rxjs/Observable';
 })
 export class UsuarioComponent {
     usuarios: Usuario[] = [];
+    usuariosFiltered: Usuario[] = [];
     oUsuario: Usuario;
     senha: string;
+    sBusca: string;
     modalActions = new EventEmitter<MaterializeAction>();
     constructor(
         private usuarioService: UsuarioService,
         private toasterService: ToasterService,
         private router: Router) {
 
-        this.oUsuario = this.usuarioService.usuario;
+        this.oUsuario = new Usuario();
         this.Populate();
     }
 
     Populate(): void {
         debugger;
-        if (this.oUsuario.isAdmin) {
+        if (this.usuarioService.usuario.isAdmin) {
             this.usuarioService.Get(this.usuarioService.usuario.instituicao.id)
                 .subscribe((usuarios: Usuario[]) => {
                     this.usuarios = usuarios;
+                    this.usuariosFiltered = this.usuarios;
                 });
         } else {
             this.usuarios = [];
-            this.usuarios.push(this.oUsuario);
+            this.usuarios.push(this.usuarioService.usuario);
         }
     }
 
@@ -56,6 +59,20 @@ export class UsuarioComponent {
                 this.modalActions.emit({ action: "modal", params: ['close'] });
             });
 
+    }
+
+
+    changeBusca(): void {
+        this.usuariosFiltered = this.usuarios.filter((a: Usuario) => {
+
+            //valida nome
+            if ((this.sBusca || this.sBusca.length == 0) &&
+                (a.login.toUpperCase().indexOf(this.sBusca.toUpperCase()) == -1)) {
+                return false;
+            }
+
+            return true;
+        });
     }
 
 

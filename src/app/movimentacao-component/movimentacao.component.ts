@@ -57,7 +57,7 @@ export class MovimentacaoComponent {
             });
         this.usuarioService.Get(this.id)
             .subscribe((usuarios: Usuario[]) => {
-                debugger;
+                 
                 this.usuarios = usuarios;
             });
     }
@@ -95,7 +95,7 @@ export class MovimentacaoComponent {
     changeBusca(): void {
         if (!this.lstMovimentacao) return
         this.lstMovimentacaoFiltered = this.lstMovimentacao.filter((_mov: Movimentacao) => {
-            debugger;
+             
             //descricao 
             if (this.sBusca && this.sBusca != "" && _mov.descricao.indexOf(this.sBusca) == -1) { return false }
 

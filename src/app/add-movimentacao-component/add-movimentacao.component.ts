@@ -45,7 +45,7 @@ export class AddMovimentacaoComponent {
             });
         this.tipoPagamentoService.Get(this.id)
             .subscribe((tipoPagamento: TipoPagamento[]) => {
-                debugger;
+                 
                 this.tipoPagamentos = tipoPagamento.filter((tipoPagamento: TipoPagamento) => { return tipoPagamento.is_ativo });
             });
     }

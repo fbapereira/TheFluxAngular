@@ -20,7 +20,7 @@ export class AddUsuarioComponent {
     }
 
     btnAdd(usuario: Usuario): void {
-        debugger;
+         
         if (!usuario.login) {
             this.toasterService.pop('success', 'Digite o [login].');
             return;

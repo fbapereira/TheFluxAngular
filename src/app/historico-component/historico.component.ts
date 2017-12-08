@@ -20,7 +20,7 @@ export class HistoricoComponent {
         private usuarioService: UsuarioService) {
         this.oUsuario = this.usuarioService.usuario;
 
-        this.movimentacaoService.Obtem(this.oUsuario)
+        this.movimentacaoService.Obtem(this.oUsuario, this.oUsuario.isAdmin)
             .subscribe((movimentacaos: Movimentacao[]) => {
                 this.movimentacaos = movimentacaos;
             });

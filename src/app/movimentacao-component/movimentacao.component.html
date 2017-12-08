@@ -38,8 +38,8 @@
                     <tr>
                         <th>Descrição</th>
                         <th>Data</th>
-                        <th>valor Bruto</th>
-                        <th>valor Liquido</th>
+                        <th>Valor Bruto</th>
+                        <th>Valor Liquido</th>
                         <th>Juros</th>
                         <th>Tipo Pagamento</th>
                         <th></th>
@@ -57,7 +57,6 @@
                             2:'R$ ': '':',':'.') }} </td>
                         <td [style.color]="getStyle(movimentacao.tipoPagamento.cobranca_Juros)">{{movimentacao.tipoPagamento.cobranca_Juros | NumberToStringFormat: 2:'': '%':',':'.' }}</td>
                         <td>{{GetTipoMovimentacao(movimentacao.tipoPagamento.id)}}</td>
-
                         <td>
                             <i class="material-icons" (click)="ShowDetail(movimentacao)" style="cursor: pointer">info</i>
                             <i class="material-icons" (click)="Cancel(movimentacao)" style="cursor: pointer">close</i>
@@ -68,6 +67,7 @@
         </div>
     </li>
 </ul>
+<p *ngIf="!oUsuario.isAdmin">* Você esta vendo apenas a visão de suas movimentações e não as movimentações gerais da empresa</p>
 <!-- Modal Structure -->
 <div id="mdlChangePassword" *ngIf="this.targetMovimentacao" class="modal" materialize="modal" [materializeParams]="[{dismissible: true}]"
     [materializeActions]="modalActions">
@@ -111,7 +111,7 @@
                 Tipo de Pagamento
             </div>
             <div class="col s6 l3 valor">
-                {{this.targetMovimentacao.tipoPagamento.nome}}
+                {{GetTipoMovimentacao(this.targetMovimentacao.tipoPagamento.id)}}
             </div>
             <div class="col s6 l3 campo">
                 Juros cobrado

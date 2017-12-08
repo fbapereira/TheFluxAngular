@@ -45,7 +45,7 @@ export class DashboardComponent {
     }
 
     popular(): void {
-        this.movimentacaoService.Obtem(this.oUsuario)
+        this.movimentacaoService.Obtem(this.oUsuario, this.oUsuario.isAdmin)
             .subscribe((movimentacaos: Movimentacao[]) => {
                 this.movimentacaos = movimentacaos;
                 //adicionar forma de pagamento
@@ -54,9 +54,6 @@ export class DashboardComponent {
                         return tipoPagamento.id == movimentacao.tipoPagamento.id;
                     })[0];
                 })
-
-
-
 
                 // calculo
                 this.entradaLiquida = 0;

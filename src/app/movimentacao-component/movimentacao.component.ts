@@ -23,7 +23,6 @@ export class MovimentacaoComponent {
     @Input()
     hasSearch: Boolean;
 
-    @Input()
     lstMovimentacao: Movimentacao[];
     lstMovimentacaoFiltered: Movimentacao[];
 
@@ -46,19 +45,21 @@ export class MovimentacaoComponent {
         this.oUsuario = this.usuarioService.usuario;
         this.id = this.usuarioService.usuario.instituicao.id;
 
-
-        this.tipoMovimentacaoService.Get(this.id)
-            .subscribe((tipoMovimentacaos: TipoMovimentacao[]) => {
+        Observable.forkJoin(
+            this.tipoMovimentacaoService.Get(this.id),
+            this.tipoPagamentoService.Get(this.id),
+            this.usuarioService.Get(this.id),
+            this.movimentacaoService.Obtem(this.oUsuario, this.oUsuario.isAdmin))
+            .subscribe((
+                [tipoMovimentacaos,
+                    tipoPagamento,
+                    usuarios,
+                    movimentacaos]) => {
                 this.tipoMovimentacaos = tipoMovimentacaos;
-            });
-        this.tipoPagamentoService.Get(this.id)
-            .subscribe((tipoPagamento: TipoPagamento[]) => {
                 this.tipoPagamentos = tipoPagamento;
-            });
-        this.usuarioService.Get(this.id)
-            .subscribe((usuarios: Usuario[]) => {
-
                 this.usuarios = usuarios;
+                this.lstMovimentacao = movimentacaos;
+                this.changeBusca();
             });
     }
 
@@ -84,9 +85,7 @@ export class MovimentacaoComponent {
             });
 
     }
-    ngOnChanges(changes: SimpleChanges) {
-        this.changeBusca();
-    }
+
 
     GetTipoMovimentacao(id: number): string {
         let objs: any = this.tipoMovimentacaos.filter((tipoMovimentacao: TipoMovimentacao) => {
@@ -98,7 +97,7 @@ export class MovimentacaoComponent {
 
     GetUsuario(id: number): string {
         return this.usuarios.filter((usuario: Usuario) => {
-            return usuario.id = id;
+            return usuario.id == id;
         })[0].login;
     }
 
@@ -127,5 +126,10 @@ export class MovimentacaoComponent {
             return true;
         })
 
+        this.lstMovimentacaoFiltered.forEach((movimentacao: Movimentacao) => {
+            movimentacao.tipoPagamento = this.tipoPagamentos.filter((tipoPagamento: TipoPagamento) => {
+                return tipoPagamento.id == movimentacao.tipoPagamento.id;
+            })[0];
+        });
     }
 }

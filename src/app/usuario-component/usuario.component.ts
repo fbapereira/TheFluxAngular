@@ -38,6 +38,7 @@ export class UsuarioComponent {
         } else {
             this.usuarios = [];
             this.usuarios.push(this.usuarioService.usuario);
+            this.usuariosFiltered = this.usuarios;
         }
     }
 

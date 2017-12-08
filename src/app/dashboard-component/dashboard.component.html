@@ -6,39 +6,42 @@
                     <i class="material-icons ">filter_list</i>Resumo
                 </div>
                 <div class="collapsible-body ">
-                    <p>
-                        <b>Entrada</b>:
-                        <label> {{(entrada | NumberToStringFormat: 2:'R$ ': '':',':'.') }}</label>
-                    </p>
-                    <p>
-                        <b> Juros Entrada</b>:
-                        <label> {{(jurosEntrada | NumberToStringFormat: 2:'R$ ': '':',':'.') }}</label>
-                    </p>
-                    <p>
-                        <b>Saída</b>:
-                        <label> {{(saida | NumberToStringFormat: 2:'R$ ': '':',':'.') }} </label>
-                    </p>
-                    <p>
-                        <b>Juros Saída</b>:
-                        <label> {{(jurosSaida | NumberToStringFormat: 2:'R$ ': '':',':'.') }} </label>
-                    </p>
-                    <p>
-                        <b>Caixa</b>:
-                        <label> {{(total | NumberToStringFormat: 2:'R$ ': '':',':'.') }} </label>
-                    </p>
-
+                    <table>
+                        <tr>
+                            <td></td>
+                            <td>Bruto</td>
+                            <td>Liquido</td>
+                            <td> # </td>
+                        </tr>
+                        <tr>
+                            <td>Entrada</td>
+                            <td>{{entradaBruta | NumberToStringFormat: 2:'R$ ': '':',':'.'}}</td>
+                            <td>{{entradaLiquida | NumberToStringFormat: 2:'R$ ': '':',':'.'}}</td>
+                            <td [style.color]="getStyle(entradaLiquida - entradaBruta)">{{(entradaLiquida - entradaBruta)| NumberToStringFormat: 2:'R$ ': '':',':'.'}} ( {{(entradaLiquida/entradaBruta
+                                - 1)| NumberToStringFormat: 2:'': '%':',':'.'}})
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Saida</td>
+                            <td>{{saidaBruta | NumberToStringFormat: 2:'R$ ': '':',':'.'}}</td>
+                            <td>{{saidaLiquida | NumberToStringFormat: 2:'R$ ': '':',':'.'}}</td>
+                            <td [style.color]="getStyle(saidaBruta - saidaLiquida)">{{(saidaBruta - saidaLiquida)| NumberToStringFormat: 2:'R$ ': '':',':'.'}} ( {{(saidaLiquida/saidaBruta
+                                - 1)| NumberToStringFormat: 2:'': '%':',':'.'}})
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Total</td>
+                            <td [style.color]="getStyle(entradaBruta + saidaBruta)">{{entradaBruta + saidaBruta | NumberToStringFormat: 2:'R$ ': '':',':'.'}}</td>
+                            <td [style.color]="getStyle(entradaLiquida + saidaLiquida)">{{entradaLiquida + saidaLiquida | NumberToStringFormat: 2:'R$ ': '':',':'.'}}</td>
+                            <td></td>
+                        </tr>
+                    </table>
                 </div>
             </li>
-            <li>
-                <div class="collapsible-header ">
-                    <i class="material-icons ">storage</i>Detalhe
-                </div>
-                <div class="collapsible-body ">
 
-                    <u2x-tf-movimentacao [lstMovimentacao]="movimentacaos" [hasSearch]="false"></u2x-tf-movimentacao>
-                </div>
-            </li>
         </ul>
+        <u2x-tf-movimentacao [lstMovimentacao]="movimentacaos" [hasSearch]="false"></u2x-tf-movimentacao>
+
     </div>
 </div>
 <div class="fixed-action-btn ">

@@ -1,43 +1,73 @@
-<div *ngIf="hasSearch">
-    <div class="row">
-        <div class="input-field col s8 offset-s2 ">
-            <input id="txtBusca" [(ngModel)]="sBusca" placeholder="Buscar" class="validate" (keyup)="changeBusca()">
-        </div>
-    </div>
-    <div class="row">
-        <div class="input-field col s4 offset-s2 ">
-            <input id="txtBusca" [(ngModel)]="sMin" placeholder="Valor Minimo" class="validate" (keyup)="changeBusca()">
-        </div>
-        <div class="input-field col s4  ">
-            <input id="txtBusca" [(ngModel)]="sMax" placeholder="Valor Maximo" class="validate" (keyup)="changeBusca()">
-        </div>
-    </div>
-</div>
+<ul class="collapsible" *ngIf="hasSearch" materialize="collapsible" data-collapsible="accordion ">
 
-<table id="tblServico " class="responsive-table" *ngIf="lstMovimentacao && lstMovimentacao.length > 0">
-    <thead>
-        <tr>
-            <th>Descrição</th>
-            <th>Data</th>
-            <th>valor</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+    <li>
+        <div class="collapsible-header active">
+            <i class="material-icons ">filter_list</i>Filtros
+        </div>
+        <div class="collapsible-body ">
+            <div>
+                <div class="row">
+                    <div class="input-field col s8 offset-s2 ">
+                        <input id="txtBusca" [(ngModel)]="sBusca" placeholder="Buscar" class="validate" (keyup)="changeBusca()">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s4 offset-s2 ">
+                        <input id="txtBusca" [(ngModel)]="sMin" placeholder="Valor Minimo" class="validate" (keyup)="changeBusca()">
+                    </div>
+                    <div class="input-field col s4  ">
+                        <input id="txtBusca" [(ngModel)]="sMax" placeholder="Valor Maximo" class="validate" (keyup)="changeBusca()">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
 
-        <tr *ngFor="let movimentacao of lstMovimentacaoFiltered">
-            <td>{{(movimentacao.descricao.length>12)? (movimentacao.descricao | slice:0:12)+'...':(movimentacao.descricao )}}
-            </td>
-            <td>{{movimentacao.data | date : "dd/MM/yyyy"}}</td>
-            <td>{{(movimentacao.valor | NumberToStringFormat: 2:'R$ ': '':',':'.') }} </td>
-            <td>
-                <i class="material-icons" (click)="ShowDetail(movimentacao)" style="cursor: pointer">info</i>
-                <i class="material-icons" (click)="Cancel(movimentacao)" style="cursor: pointer">close</i>
-            </td>
-        </tr>
-    </tbody>
-</table>
+</ul>
 
+<ul class="collapsible" materialize="collapsible" data-collapsible="accordion ">
+    <li>
+        <div class="collapsible-header active">
+            <i class="material-icons ">storage</i>Detalhe
+        </div>
+        <div class="collapsible-body ">
+
+
+            <table id="tblServico " class="responsive-table" *ngIf="lstMovimentacao && lstMovimentacao.length > 0">
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Data</th>
+                        <th>valor Bruto</th>
+                        <th>valor Liquido</th>
+                        <th>Juros</th>
+                        <th>Tipo Pagamento</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr *ngFor="let movimentacao of lstMovimentacaoFiltered">
+                        <td>{{(movimentacao.descricao.length>12)? (movimentacao.descricao | slice:0:12)+'...':(movimentacao.descricao
+                            )}}
+                        </td>
+                        <td>{{movimentacao.data | date : "dd/MM/yyyy"}}</td>
+                        <td [style.color]="getStyle(movimentacao.valor)">{{(movimentacao.valor | NumberToStringFormat: 2:'R$ ': '':',':'.') }} </td>
+                        <td [style.color]="getStyle(movimentacao.valor)">{{((movimentacao.valor * ((100 + movimentacao.tipoPagamento.cobranca_Juros) / 100)) | NumberToStringFormat:
+                            2:'R$ ': '':',':'.') }} </td>
+                        <td [style.color]="getStyle(movimentacao.tipoPagamento.cobranca_Juros)">{{movimentacao.tipoPagamento.cobranca_Juros | NumberToStringFormat: 2:'': '%':',':'.' }}</td>
+                        <td>{{GetTipoMovimentacao(movimentacao.tipoPagamento.id)}}</td>
+
+                        <td>
+                            <i class="material-icons" (click)="ShowDetail(movimentacao)" style="cursor: pointer">info</i>
+                            <i class="material-icons" (click)="Cancel(movimentacao)" style="cursor: pointer">close</i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </li>
+</ul>
 <!-- Modal Structure -->
 <div id="mdlChangePassword" *ngIf="this.targetMovimentacao" class="modal" materialize="modal" [materializeParams]="[{dismissible: true}]"
     [materializeActions]="modalActions">
@@ -46,59 +76,74 @@
         <br />
         <br />
         <div class="row">
-            <div class="input-field col s8 offset-s2" *ngIf="tipoMovimentacaos.length > 0">
-                <select materialize="material_select" [materializeSelectOptions]="selectOptions" [(ngModel)]="this.targetMovimentacao.tipoMovimentacao.id"
-                    disabled>
-                    <option value="" disabled selected>Escolha o tipo de movimentação</option>
-                    <option *ngFor="let option of tipoMovimentacaos" [value]="option.id">{{option.descricao}}</option>
-                </select>
-                <label>Tipo de Movimentação</label>
+            <div class="col s6 l3 campo">
+                Valor Liquido
+            </div>
+            <div class="col s6 l3 valor" [style.color]="getStyle(targetMovimentacao.valor * ((targetMovimentacao.tipoPagamento.cobranca_Juros + 100) / 100) )">
+                {{targetMovimentacao.valor * ((targetMovimentacao.tipoPagamento.cobranca_Juros + 100) / 100) | NumberToStringFormat: 2:'R$
+                ': '':',':'.'}}
+            </div>
+            <div class="col s6 l3 campo">
+                Valor Bruto
+            </div>
+            <div class="col s6 l3 valor" [style.color]="getStyle(this.targetMovimentacao.valor)">
+                {{this.targetMovimentacao.valor | NumberToStringFormat: 2:'R$ ': '':',':'.'}}
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s8 offset-s2" *ngIf="tipoPagamentos.length > 0">
-                <select materialize="material_select" [materializeSelectOptions]="selectOptions" [(ngModel)]="this.targetMovimentacao.tipoPagamento.id"
-                    disabled>
-                    <option value="" disabled selected>Escolha o tipo de pagamento</option>
-                    <option *ngFor="let pag of tipoPagamentos" [value]="pag.id">{{pag.nome}}</option>
-                </select>
-                <label>Tipo de Pagamento</label>
+            <div class="col s6 l3 campo">
+                Data
+            </div>
+            <div class="col s6 l3 valor">
+                {{this.targetMovimentacao.data | date: 'dd/MM/yyyy' }}
+            </div>
+            <div class="col s6 l3 campo">
+                Usuário
+            </div>
+            <div class="col s6 l3 valor">
+                {{GetUsuario(this.targetMovimentacao.usuario.id)}}
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col s6 l3 campo">
+                Tipo de Pagamento
+            </div>
+            <div class="col s6 l3 valor">
+                {{this.targetMovimentacao.tipoPagamento.nome}}
+            </div>
+            <div class="col s6 l3 campo">
+                Juros cobrado
+            </div>
+            <div class="col s6 l3 valor" [style.color]="getStyle(this.targetMovimentacao.tipoPagamento.cobranca_Juros)">
+                {{this.targetMovimentacao.tipoPagamento.cobranca_Juros | NumberToStringFormat: 2:'': '%':',':'.'}}
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s8 offset-s2" *ngIf="usuarios.length > 0">
-                <select materialize="material_select" [materializeSelectOptions]="selectOptions" [(ngModel)]="this.targetMovimentacao.usuario.id"
-                    disabled>
-                    <option value="" disabled selected>Escolha o usuario</option>
-                    <option *ngFor="let usu of usuarios" [value]="usu.id">{{usu.login}}</option>
-                </select>
-                <label>Tipo de Pagamento</label>
+            <div class="col s12 l12 campo">
+                Tipo de Movimentação
+            </div>
+            <div class="col s12 l12 valor">
+                {{GetTipoMovimentacao(this.targetMovimentacao.tipoMovimentacao.id)}}
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s8 offset-s2">
-                <input id="txtValor" placeholder="#" type="number" step="0.01" min="0.01" class="validate" [(ngModel)]="this.targetMovimentacao.valor"
-                    disabled>
-                <label for="txtValor">Valor</label>
+            <div class="col s12 l12 campo">
+                Descrição
             </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s8 offset-s2">
-                <input id="txtDate" type="date" placeholder="Data" class="validate" [ngModel]="this.targetMovimentacao.data | date:'yyyy-MM-dd'"
-                    (ngModelChange)="this.targetMovimentacao.data = $event" disabled>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s8 offset-s2">
-                <input id="txtDescription" placeholder="#" type="text" class="validate" [(ngModel)]="this.targetMovimentacao.descricao" disabled>
-                <label for="txtDescription">Descrição</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s8 offset-s2">
-                <input type="checkbox" placeholder="#" id="test5" [(ngModel)]="this.targetMovimentacao.isEntrada" disabled />
-                <label for="test5">É entrada?</label>
+            <div class="col s12 l12 valor">
+                {{this.targetMovimentacao.descricao}}
             </div>
         </div>
     </div>
 </div>
+<style>
+    .valor {
+        color: gray
+    }
+
+    .campo {
+        font-weight: bold;
+    }
+</style>

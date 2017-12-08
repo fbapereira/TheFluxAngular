@@ -17,11 +17,11 @@ export class DashboardComponent {
 
     movimentacaos: Movimentacao[];
     tipoPagamentos: TipoPagamento[];
-    entrada: number;
-    jurosEntrada: number;
-    saida: number;
-    jurosSaida: number;
-    total: number;
+
+    entradaLiquida: number;
+    entradaBruta: number;
+    saidaLiquida: number;
+    saidaBruta: number;
 
     constructor(private toasterService: ToasterService,
         private movimentacaoService: MovimentacaoService,
@@ -40,6 +40,10 @@ export class DashboardComponent {
             });
     }
 
+    getStyle(nNumber: number): string {
+        return nNumber > 0 ? "green" : (nNumber == 0 ? "black" : "red");
+    }
+
     popular(): void {
         this.movimentacaoService.Obtem(this.oUsuario)
             .subscribe((movimentacaos: Movimentacao[]) => {
@@ -51,22 +55,24 @@ export class DashboardComponent {
                     })[0];
                 })
 
+
+
+
                 // calculo
-                this.jurosEntrada = 0;
-                this.entrada = 0;
-                this.jurosSaida = 0;
-                this.saida = 0;
+                this.entradaLiquida = 0;
+                this.entradaBruta = 0;
+                this.saidaLiquida = 0;
+                this.saidaBruta = 0;
+
                 movimentacaos.forEach((movimentacao: Movimentacao) => {
                     if (movimentacao.isEntrada) {
-                        this.jurosEntrada = this.jurosEntrada + (movimentacao.valor * (movimentacao.tipoPagamento.cobranca_Juros / 100))
-                        this.entrada = this.entrada + movimentacao.valor;
+                        this.entradaLiquida = this.entradaLiquida + (movimentacao.valor * ((movimentacao.tipoPagamento.cobranca_Juros + 100) / 100))
+                        this.entradaBruta = this.entradaBruta + movimentacao.valor;
                     } else {
-                        this.jurosSaida = this.jurosSaida + (movimentacao.valor * (movimentacao.tipoPagamento.cobranca_Juros / 100))
-                        this.saida = this.saida + movimentacao.valor;
+                        this.saidaLiquida = this.saidaLiquida + (movimentacao.valor * ((movimentacao.tipoPagamento.cobranca_Juros + 100) / 100))
+                        this.saidaBruta = this.saidaBruta + movimentacao.valor;
                     }
                 });
-                this.total = this.entrada - this.saida - this.jurosEntrada - this.jurosSaida;
-
             });
     }
 }

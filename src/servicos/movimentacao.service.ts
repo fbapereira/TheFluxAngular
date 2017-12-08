@@ -33,9 +33,24 @@ export class MovimentacaoService {
                     movimentacaoRetorno.usuario = new Usuario();
                     movimentacaoRetorno.usuario.id = movimentacao.idUsuario;
                     movimentacaoRetorno.valor = movimentacao.valor;
+
+                    //fix calc 
+                    if (!movimentacaoRetorno.isEntrada) {
+                        movimentacaoRetorno.valor = movimentacaoRetorno.valor * -1;
+                    }
+
                     movimentacaosRetorno.push(movimentacaoRetorno);
                 });
 
+                movimentacaosRetorno = movimentacaosRetorno.sort((a: Movimentacao, b: Movimentacao) => {
+                    let dtA: any = moment(a.data);
+                    let dtB: any = moment(b.data);
+                    if (dtA.isAfter(dtB))
+                        return 1;
+                    if (dtA.isBefore(dtB))
+                        return -1;
+                    return 0;
+                })
                 return movimentacaosRetorno;
             });
     };
@@ -48,7 +63,7 @@ export class MovimentacaoService {
         obj.idUsuario = oTipoMovimentacao.usuario.id;
 
         let movimentacaos: Movimentacao[] = [];
-         
+
         for (var _i = 0; _i < oTipoMovimentacao.repetir; _i++) {
             let sendData: any = new Movimentacao();
 

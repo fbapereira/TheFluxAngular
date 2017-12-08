@@ -57,7 +57,7 @@ export class MovimentacaoComponent {
             });
         this.usuarioService.Get(this.id)
             .subscribe((usuarios: Usuario[]) => {
-                 
+
                 this.usuarios = usuarios;
             });
     }
@@ -88,6 +88,23 @@ export class MovimentacaoComponent {
         this.changeBusca();
     }
 
+    GetTipoMovimentacao(id: number): string {
+        return this.tipoMovimentacaos.filter((tipoMovimentacao: TipoMovimentacao) => {
+            return tipoMovimentacao.id = id;
+        })[0].descricao;
+    }
+
+    GetUsuario(id: number): string {
+        return this.usuarios.filter((usuario: Usuario) => {
+            return usuario.id = id;
+        })[0].login;
+    }
+
+
+    getStyle(nNumber: number): string {
+        return nNumber > 0 ? "green" : (nNumber == 0 ? "black" : "red");
+    }
+
     sBusca: string = "";
     sMin: string;
     sMax: string;
@@ -95,9 +112,9 @@ export class MovimentacaoComponent {
     changeBusca(): void {
         if (!this.lstMovimentacao) return
         this.lstMovimentacaoFiltered = this.lstMovimentacao.filter((_mov: Movimentacao) => {
-             
+
             //descricao 
-            if (this.sBusca && this.sBusca != "" && _mov.descricao.indexOf(this.sBusca) == -1) { return false }
+            if (this.sBusca && this.sBusca != "" && _mov.descricao.toUpperCase().indexOf(this.sBusca.toUpperCase()) == -1) { return false }
 
             // valida min 
             if (this.sMin && this.sMin != "" && _mov.valor < Number(this.sMin)) { return false }

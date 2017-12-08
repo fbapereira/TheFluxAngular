@@ -89,9 +89,11 @@ export class MovimentacaoComponent {
     }
 
     GetTipoMovimentacao(id: number): string {
-        return this.tipoMovimentacaos.filter((tipoMovimentacao: TipoMovimentacao) => {
+        let objs: any = this.tipoMovimentacaos.filter((tipoMovimentacao: TipoMovimentacao) => {
             return tipoMovimentacao.id = id;
-        })[0].descricao;
+        })
+        if (objs && objs.length == 0) { return ""; }
+        return objs[0].descricao;
     }
 
     GetUsuario(id: number): string {

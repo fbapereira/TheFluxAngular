@@ -2,10 +2,10 @@
     <div class="container ">
         <ul materialize="collapsible" class="collapsible " data-collapsible="accordion ">
             <li>
-                <div class="collapsible-header active ">
-                    <i class="material-icons ">filter_list</i>Todos
+                <div class="collapsible-header">
+                    <i class="material-icons ">filter_list</i>Filtros
                 </div>
-                <div class="collapsible-body ">
+                <div class="collapsible-body">
 
                     <div class="row">
                         <div class="input-field col s8 offset-s2 ">
@@ -19,6 +19,15 @@
 
                         </div>
                     </div>
+                </div>
+            </li>
+        </ul>
+        <ul materialize="collapsible" class="collapsible " data-collapsible="accordion ">
+            <li>
+                <div class="collapsible-header active">
+                    <i class="material-icons ">list</i>Resultado
+                </div>
+                <div class="collapsible-body">
                     <p *ngIf="!tiposMovimentacaoFiltered || tiposMovimentacaoFiltered.length == 0">
                         Nenhum tipo de movimentacao foi encontrada
                     </p>

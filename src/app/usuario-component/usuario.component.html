@@ -2,8 +2,8 @@
     <div class="container ">
         <ul materialize="collapsible" class="collapsible " data-collapsible="accordion ">
             <li>
-                <div class="collapsible-header active ">
-                    <i class="material-icons ">filter_list</i>Todos
+                <div class="collapsible-header">
+                    <i class="material-icons ">filter_list</i>Filtro
                 </div>
                 <div class="collapsible-body ">
                     <div class="row">
@@ -11,7 +11,15 @@
                             <input id="txtBusca" [(ngModel)]="sBusca" placeholder="Buscar" class="validate" (keyup)="changeBusca()">
                         </div>
                     </div>
-
+                </div>
+            </li>
+        </ul>
+        <ul materialize="collapsible" class="collapsible " data-collapsible="accordion ">
+            <li>
+                <div class="collapsible-header active ">
+                    <i class="material-icons ">list</i>Resultado
+                </div>
+                <div class="collapsible-body ">
                     <table *ngIf="usuarios && usuarios.length > 0">
                         <thead>
                             <tr>

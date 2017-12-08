@@ -8,7 +8,7 @@ import { observeOn } from 'rxjs/operator/observeOn';
 
 @Injectable()
 export class TFHTTPService {
-    private URL_CONF = "http://localhost:64010"
+    private URL_CONF = "http://theflux.u2x.com.br"
 
     isWorking: EventEmitter<boolean> = new EventEmitter();
 

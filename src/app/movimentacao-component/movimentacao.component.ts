@@ -120,7 +120,7 @@ export class MovimentacaoComponent {
     changeBusca(): void {
         if (!this.lstMovimentacao) return
         this.lstMovimentacaoFiltered = this.lstMovimentacao.filter((_mov: Movimentacao) => {
-            debugger;
+             
             //descricao 
             if (this.sBusca && this.sBusca != "" && _mov.descricao.toUpperCase().indexOf(this.sBusca.toUpperCase()) == -1) { return false }
 

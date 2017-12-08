@@ -28,7 +28,7 @@ export class UsuarioComponent {
     }
 
     Populate(): void {
-        debugger;
+         
         if (this.usuarioService.usuario.isAdmin) {
             this.usuarioService.Get(this.usuarioService.usuario.instituicao.id)
                 .subscribe((usuarios: Usuario[]) => {

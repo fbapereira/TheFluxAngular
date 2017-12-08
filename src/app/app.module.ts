@@ -63,9 +63,8 @@ import { LoaderComponent } from './loader-component/loader.component';
         { path: 'alter-senha', component: AlterarSenhaComponent },
         { path: 'historico', component: HistoricoComponent },
         { path: '', redirectTo: '/login', pathMatch: 'full' },
-        // { path: '**', component: PageNotFoundComponent }
-      ],
-      { enableTracing: true } // <-- debugging purposes only
+        { path: '**', component: DashboardComponent }
+      ]
     )
   ],
   providers: [HttpClient, TFHTTPService, UsuarioService, TipoMovimentacaoService, TipoPagamentoService, MovimentacaoService],

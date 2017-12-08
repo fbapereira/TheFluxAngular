@@ -1,6 +1,6 @@
 <div class="section no-pad-bot " id="index-banner" *ngIf="usuarios && usuarios.length > 0 ">
     <div class="container ">
-        <ul materialize="collapsible" class="collapsible " data-collapsible="accordion ">
+        <ul materialize="collapsible" class="collapsible " data-collapsible="accordion " *ngIf="usuarioService.usuario.isAdmin">
             <li>
                 <div class="collapsible-header">
                     <i class="material-icons ">filter_list</i>Filtro
@@ -43,7 +43,7 @@
         </ul>
     </div>
 </div>
-<div class="fixed-action-btn ">
+<div class="fixed-action-btn" *ngIf="usuarioService.usuario.isAdmin">
     <a class="btn-floating purple darken-3" routerLink="/add-usuario" routerLinkActive="active">
         <i class="material-icons ">add</i>
     </a>

@@ -20,10 +20,10 @@
                     <a id="mnHistorico " href="report.html" *ngIf="usuarioService.usuario.isAdmin">Relatório</a>
                 </li> -->
                 <li>
-                    <a routerLink="/tipo-movimentacao" routerLinkActive="active">Tipo de Movimentação</a>
+                    <a routerLink="/tipo-movimentacao" routerLinkActive="active" *ngIf="usuarioService.usuario.isAdmin">Tipo de Movimentação</a>
                 </li>
                 <li>
-                    <a routerLink="/tipo-pagamento" routerLinkActive="active">Tipo de Pagamento</a>
+                    <a routerLink="/tipo-pagamento" routerLinkActive="active" *ngIf="usuarioService.usuario.isAdmin">Tipo de Pagamento</a>
                 </li>
                 <li>
                     <a routerLink="/usuario" routerLinkActive="active" >Usuário</a>
@@ -57,10 +57,10 @@
                         <a id="mnHistorico " href="report.html" *ngIf="usuarioService.usuario.isAdmin">Relatório</a>
                     </li> -->
                     <li>
-                        <a routerLink="/tipo-movimentacao" routerLinkActive="active">Tipo de Movimentação</a>
+                        <a routerLink="/tipo-movimentacao" routerLinkActive="active" *ngIf="usuarioService.usuario.isAdmin">Tipo de Movimentação</a>
                     </li>
                     <li>
-                        <a routerLink="/tipo-pagamento" routerLinkActive="active">Tipo de Pagamento</a>
+                        <a routerLink="/tipo-pagamento" routerLinkActive="active" *ngIf="usuarioService.usuario.isAdmin">Tipo de Pagamento</a>
                     </li>
                     <li>
                         <a routerLink="/usuario" routerLinkActive="active" >Usuário</a>

@@ -14,6 +14,7 @@ import { Movimentacao } from '../../modelos/movimentacao';
 import { TipoPagamentoService } from '../../servicos/tipo-pagamento.service';
 import { MovimentacaoService } from '../../servicos/movimentacao.service';
 import { TipoPagamento } from '../../modelos/tipo-pagamento';
+import * as moment from 'moment';
 @Component({
     selector: 'u2x-tf-movimentacao',
     templateUrl: './movimentacao.component.html'
@@ -32,6 +33,7 @@ export class MovimentacaoComponent {
     modalActions = new EventEmitter<MaterializeAction>();
     tipoMovimentacaos: TipoMovimentacao[] = [];
     tipoPagamentos: TipoPagamento[] = [];
+    tipoGeral: String[] = ["Entrada", "Saída"];
     usuarios: Usuario[] = [];
 
     constructor(
@@ -89,7 +91,7 @@ export class MovimentacaoComponent {
 
     GetTipoMovimentacao(id: number): string {
         let objs: any = this.tipoMovimentacaos.filter((tipoMovimentacao: TipoMovimentacao) => {
-            return tipoMovimentacao.id = id;
+            return tipoMovimentacao.id == id;
         })
         if (objs && objs.length == 0) { return ""; }
         return objs[0].descricao;
@@ -109,11 +111,16 @@ export class MovimentacaoComponent {
     sBusca: string = "";
     sMin: string;
     sMax: string;
+    dMin: any;
+    dMax: any;
     sUsuario: string;
+    sTipo: string = "0";
+    stipoMovimentacaos: string = "0";
+    sTipoPagamentos: string = "0";
     changeBusca(): void {
         if (!this.lstMovimentacao) return
         this.lstMovimentacaoFiltered = this.lstMovimentacao.filter((_mov: Movimentacao) => {
-
+            debugger;
             //descricao 
             if (this.sBusca && this.sBusca != "" && _mov.descricao.toUpperCase().indexOf(this.sBusca.toUpperCase()) == -1) { return false }
 
@@ -122,6 +129,35 @@ export class MovimentacaoComponent {
 
             // valida max
             if (this.sMax && this.sMax != "" && _mov.valor > Number(this.sMax)) { return false }
+
+            //Tipo 
+            if (this.sTipo == "Entrada" && !_mov.isEntrada) { return false; }
+            if (this.sTipo == "Saída" && _mov.isEntrada) { return false; }
+
+            //Tipo MOvimentacao
+            if (Number(this.stipoMovimentacaos) != 0 && _mov.tipoMovimentacao.id != Number(this.stipoMovimentacaos)) { return false; }
+
+            //Tipo pagamento
+            if (Number(this.sTipoPagamentos) != 0 && _mov.tipoPagamento.id != Number(this.sTipoPagamentos)) { return false; }
+
+
+            // valida min data
+            if (this.dMin && this.dMin != "") {
+                this.dMin = moment(this.dMin);
+
+                let dData = moment(_mov.data);
+                if (dData.isBefore(this.dMin)) { return false }
+            }
+
+            // valida max data
+            if (this.dMax && this.dMax != "") {
+                this.dMax = moment(this.dMax);
+
+                let dData = moment(_mov.data);
+                if (dData.isAfter(this.dMax)) { return false }
+            }
+
+
 
             return true;
         })

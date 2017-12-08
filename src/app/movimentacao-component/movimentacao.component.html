@@ -7,22 +7,61 @@
         <div class="collapsible-body ">
             <div>
                 <div class="row">
-                    <div class="input-field col s8 offset-s2 ">
-                        <input id="txtBusca" [(ngModel)]="sBusca" placeholder="Buscar" class="validate" (keyup)="changeBusca()">
+                    <div class="input-field col s12 l6  ">
+                        <label>Buscar</label>
+                        <Br/>
+                        <input id="txtBusca" [(ngModel)]="sBusca" class="validate" (keyup)="changeBusca()">
+                    </div>
+                    <div class="input-field col s12 l3">
+                        <label>Valor Minima</label>
+                        <Br/>
+                        <input id="txtBusca" [(ngModel)]="sMin" class="validate" (keyup)="changeBusca()">
+                    </div>
+                    <div class="input-field col s12 l3  ">
+                        <label>Valor Maximo</label>
+                        <Br/>
+                        <input id="txtBusca" [(ngModel)]="sMax" class="validate" (keyup)="changeBusca()">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s4 offset-s2 ">
-                        <input id="txtBusca" [(ngModel)]="sMin" placeholder="Valor Minimo" class="validate" (keyup)="changeBusca()">
+                    <div class="input-field col s12 l6 ">
+                        <label>Data Minima</label>
+                        <Br/>
+                        <input id="txtDateMin" type="date" placeholder="Data" class="validate" [ngModel]="dMin | date:'yyyy-MM-dd'" (ngModelChange)="dMin = $event; changeBusca();">
                     </div>
-                    <div class="input-field col s4  ">
-                        <input id="txtBusca" [(ngModel)]="sMax" placeholder="Valor Maximo" class="validate" (keyup)="changeBusca()">
+                    <div class="input-field col s12 l6  ">
+                        <label>Data Maxima</label>
+                        <Br/>
+                        <input id="txtDateMax" type="date" placeholder="Data" class="validate" [ngModel]="dMax | date:'yyyy-MM-dd'" (ngModelChange)="dMax = $event; changeBusca();">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12  l4" *ngIf="tipoMovimentacaos.length > 0">
+                        <select materialize="material_select" [materializeSelectOptions]="selectOptions" [(ngModel)]="stipoMovimentacaos" (ngModelChange)="changeBusca()">
+                            <option value="0" selected>Todos</option>
+                            <option *ngFor="let option of tipoMovimentacaos" [value]="option.id">{{option.descricao}}</option>
+                        </select>
+                        <label>Tipo de Movimentação</label>
+                    </div>
+                    <div class="input-field col s12  l4" *ngIf="tipoPagamentos.length > 0">
+                        <select materialize="material_select" [materializeSelectOptions]="selectOptions" [(ngModel)]="sTipoPagamentos" (ngModelChange)="changeBusca()">
+                            <option value="0" selected>Todos</option>
+                            <option *ngFor="let pag of tipoPagamentos" [value]="pag.id">{{pag.nome}}</option>
+                        </select>
+                        <label>Tipo de Pagamento</label>
+                    </div>
+                    <div class="input-field col s12  l4 " *ngIf="tipoGeral.length > 0">
+                        <select materialize="material_select" [materializeSelectOptions]="selectOptions" [(ngModel)]="sTipo" (ngModelChange)="changeBusca()">
+                            <option value="0" selected>Todos </option>
+                            <option *ngFor="let pag of tipoGeral" [value]="pag">{{pag}}</option>
+                        </select>
+                        <label>Tipo </label>
                     </div>
                 </div>
             </div>
         </div>
     </li>
-
 </ul>
 
 <ul class="collapsible" materialize="collapsible" data-collapsible="accordion ">
@@ -41,7 +80,7 @@
                         <th>Valor Bruto</th>
                         <th>Valor Liquido</th>
                         <th>Juros</th>
-                        <th>Tipo Pagamento</th>
+                        <th>Tipo Movimentação</th>
                         <th></th>
                     </tr>
                 </thead>
